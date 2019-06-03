@@ -8,11 +8,10 @@ services:
 
 before_install:
   - psql -c 'create database example;' -U postgres
-  -
+
 env:
   global:
     - CODECOV_TOKEN="c846c2bb-4eac-48a5-9252-71176e8398e6"
-
 
 # используем режим обычного пользователя для сборки проекта.
 sudo: false
