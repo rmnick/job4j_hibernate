@@ -1,4 +1,5 @@
 # используем язык java. Travis CI поддерживает другие языки тоже.
+language: java
 jdk:
   - openjdk11
 
@@ -17,7 +18,6 @@ sudo: false
 
 # после выполнения сборки запустить скрипт, который будет собирать статистику по JaCoCo
 # Здесь используется сторонни сервис https://codecov.io/
-language: java
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 
