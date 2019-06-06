@@ -1,1 +1,1 @@
-create table if not exists users (id serial primary key, name varchar(50) not null, expired timestamp);
+create table if not exists users (id serial primary key, name varchar(50), expired timestamp);

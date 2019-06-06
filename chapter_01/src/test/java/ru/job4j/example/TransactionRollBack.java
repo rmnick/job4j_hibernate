@@ -1,4 +1,4 @@
-package ru.job4j.example.modeles;
+package ru.job4j.example;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
