@@ -18,6 +18,7 @@
 
     <modules>
         <module>chapter_01</module>
+        <module>todo</module>
     </modules>
 
     <profiles>

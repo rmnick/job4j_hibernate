@@ -1,0 +1,1 @@
+create table if not exists tasks (id serial primary key, description varchar(500), created timestamp, isDone boolean);

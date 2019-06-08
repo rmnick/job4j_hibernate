@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <title>todo</title>
+</head>
+<body>
+<div class="container">
+    <h4>
+        Add task to list
+    </h4>
+    <div class="form-group">
+        <label for="formControlTextarea">Description</label>
+        <textarea class="form-control z-depth-1" id="formControlTextarea" rows="5" placeholder="Write description here..."></textarea>
+    </div>
+    <div class="row float-right">
+        <button type="button" class="btn btn-success">add task</button>
+    </div>
+</div>
+<div class="container">
+    <div class="col-sm-offset-2 col-sm-5">
+        <h3>tasks</h3>
+        <table class="table table-bordered" id="table">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>description</th>
+                <th>isDone</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
