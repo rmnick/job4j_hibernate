@@ -15,7 +15,7 @@ public class SessionFactoryUtil {
     public static SessionFactory getSessionFactory() {
         if (sf == null) {
             try {
-                sf = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+                sf = new Configuration().configure().buildSessionFactory();
             } catch (Exception e) {
                 LOG.error(e.getMessage(), e);
             }

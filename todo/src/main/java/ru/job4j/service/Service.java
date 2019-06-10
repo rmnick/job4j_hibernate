@@ -40,7 +40,7 @@ public class Service implements IService<Task> {
     }
 
     @Override
-    public List<Task> getAll(Task item) {
+    public List<Task> getAll() {
         return store.findAll();
     }
 }

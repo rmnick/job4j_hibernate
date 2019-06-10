@@ -4,5 +4,12 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
          http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
          version="2.4">
-
+    <servlet>
+        <servlet-name>Tasks</servlet-name>
+        <servlet-class>ru.job4j.controller.TasksServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Tasks</servlet-name>
+        <url-pattern>/task</url-pattern>
+    </servlet-mapping>
 </web-app>

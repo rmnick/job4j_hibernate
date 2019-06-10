@@ -7,5 +7,5 @@ public interface IService<T> {
     T delete(T item);
     T getById(T item);
     T update(T item);
-    List<T> getAll(T item);
+    List<T> getAll();
 }
