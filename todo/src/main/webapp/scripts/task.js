@@ -1,25 +1,45 @@
-console.log("hey");
-$(document).ready(function() {
+$(getTask());
+function getTask() {
     console.log("in task");
     $.ajax({
-        type: "GET",
-        url: "./task",
-        complete: function (data) {
-            $each(data, function (value) {
-               console.log(data);
+        type : "GET",
+        url : "./task",
+        dataType : "json",
+        success : function (data) {
+            $.each(data, function (index, value) {
+                console.log(value);
+            })
+            var table = $("table tbody");
+            table.empty();
+            var row;
+            $.each(data, function (index, value) {
+                if ($("#task_check").is(':checked')) {
+                    if (value.isDone != true) {
+                        row+="<tr><th>" + value.id + "</th>";
+                        row+="<th>" + value.description + "</th>";
+                        row+="<th>" + value.isDone + "</th>";
+                        row+="<th>" + value.created + "</th></tr>";
+                    }
+                } else {
+                        row+="<tr><th>" + value.id + "</th>";
+                        row+="<th>" + value.description + "</th>";
+                        row+="<th>" + value.isDone + "</th>";
+                        row+="<th>" + value.created + "</th></tr>";
+                }
+                table.append(row);
             });
-            console.log(data);
-            var tasks = JSON.parse(data.responseText);
-            for (var i = 0; i < tasks.length; i++) {
-                var id = tasks[i].id;
-                var descr = tasks[i].description;
-                var isdone = tasks[i].isDone;
-                $('#table tr:last').after('<tr><td>' + id + '</td><td>' + desc + '</td></tr>' + '</td><td>' + (isdone ? 'done' : 'process') + '</td></tr>');
-                console.log(tasks[i]);
-            }
         }
-    })
-});
+    });
+}
+
+// function showAll()
+// {
+//     if ($('#task_check').is(':checked')) {
+//         console.log("check");
+//     } else {
+//         console.log("uncheck");
+//     }
+// }
 
 // function add() {
 //     var descr = $('#description').val();

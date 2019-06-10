@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TasksServlet extends HttpServlet {
@@ -20,11 +22,19 @@ public class TasksServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("in servlet");
         List<Task> tasks = service.getAll();
-        tasks.forEach(System.out::println);
-        resp.setContentType("text/json");
-        PrintWriter pw = new PrintWriter(resp.getOutputStream());
+//        tasks.forEach(System.out::println);
+        System.out.println("size!!!!!!!!");
+        System.out.println(tasks.size());
+        System.out.println("end of size!!!");
+        System.out.println("result!!!!!");
+        System.out.println(tasks.get(0));
+
+        List<Task> result = new ArrayList<>();
+        result.add(new Task(1, "test", new Timestamp(System.currentTimeMillis()).toLocalDateTime(), false));
+        resp.setCharacterEncoding("UTF-8");
+        PrintWriter pw = resp.getWriter();
         ObjectMapper mapper = new ObjectMapper();
-        mapper.writeValue(pw, service.getAll());
+        mapper.writeValue(pw, result);
         pw.flush();
     }
 

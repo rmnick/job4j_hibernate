@@ -2,11 +2,12 @@ package ru.job4j.service.entity;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 
 public class Task {
     private int id;
     private String description;
-    private Timestamp created;
+    private LocalDateTime created;
     private boolean isDone;
 
 
@@ -14,7 +15,7 @@ public class Task {
 
     }
 
-    public Task(final int id, final String description, final Timestamp created, final boolean isDone) {
+    public Task(final int id, final String description, final LocalDateTime created, final boolean isDone) {
         this.id = id;
         this.description = description;
         this.created = created;
@@ -37,11 +38,11 @@ public class Task {
         this.description = description;
     }
 
-    public Timestamp getCreated() {
+    public LocalDateTime getCreated() {
         return created;
     }
 
-    public void setCreated(Timestamp created) {
+    public void setCreated(LocalDateTime created) {
         this.created = created;
     }
 
@@ -53,9 +54,14 @@ public class Task {
         isDone = done;
     }
 
+//    @Override
+//    public String toString() {
+//        return String.format("{id : %d, created : %s, isDone : %b}",
+//                this.id, new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(this.created), this.isDone);
+//    }
+
     @Override
     public String toString() {
-        return String.format("{id : %d, created : %s, isDone : %b}",
-                this.id, new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(this.created), this.isDone);
+        return this.description;
     }
 }
