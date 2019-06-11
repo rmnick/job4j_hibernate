@@ -1,9 +1,11 @@
 package ru.job4j.persistence;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
 import ru.job4j.service.entity.Task;
 
 import java.util.List;
@@ -72,7 +74,9 @@ public class HibernateStore implements IStore<Task> {
     @Override
     public List<Task> findAll() {
         return doTransaction(session -> {
-            return session.createCriteria(Task.class).list();
+            Criteria criteria = session.createCriteria(Task.class);
+            criteria.addOrder(Order.asc("id"));
+            return criteria.list();
         });
     }
 }

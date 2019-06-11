@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 public class Task {
     private int id;
     private String description;
-    private LocalDateTime created;
+    private Timestamp created;
     private boolean isDone;
 
 
@@ -15,7 +15,7 @@ public class Task {
 
     }
 
-    public Task(final int id, final String description, final LocalDateTime created, final boolean isDone) {
+    public Task(final int id, final String description, final Timestamp created, final boolean isDone) {
         this.id = id;
         this.description = description;
         this.created = created;
@@ -38,11 +38,11 @@ public class Task {
         this.description = description;
     }
 
-    public LocalDateTime getCreated() {
+    public Timestamp getCreated() {
         return created;
     }
 
-    public void setCreated(LocalDateTime created) {
+    public void setCreated(Timestamp created) {
         this.created = created;
     }
 

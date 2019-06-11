@@ -1,58 +1,99 @@
 $(getTask());
+
+//show tasks
 function getTask() {
-    console.log("in task");
     $.ajax({
         type : "GET",
         url : "./task",
         dataType : "json",
         success : function (data) {
-            $.each(data, function (index, value) {
-                console.log(value);
-            })
-            var table = $("table tbody");
+            var table = $("#tbody");
             table.empty();
             var row;
             $.each(data, function (index, value) {
+                var date = new Date(value.created);
+                var isdone = value.isDone;
+                var id = value.id;
                 if ($("#task_check").is(':checked')) {
-                    if (value.isDone != true) {
-                        row+="<tr><th>" + value.id + "</th>";
-                        row+="<th>" + value.description + "</th>";
-                        row+="<th>" + value.isDone + "</th>";
-                        row+="<th>" + value.created + "</th></tr>";
+                    console.log("push check");
+                    if (isdone) {
+                        console.log(value.id);
+                        row ="<tr><td>" + id+ "</td>";
+                        row+="<td>" + value.description + "</td>";
+                        row+="<td>" + "<input type='radio' class='center-block' name='completed' disabled></td>";
+                        row+="<td>" + date.toDateString() + "</td></tr>";
+                        table.append(row);
                     }
                 } else {
-                        row+="<tr><th>" + value.id + "</th>";
-                        row+="<th>" + value.description + "</th>";
-                        row+="<th>" + value.isDone + "</th>";
-                        row+="<th>" + value.created + "</th></tr>";
+                    console.log("push uncheck");
+                    console.log(value.id);
+                    row ="<tr><td>" + value.id + "</td>";
+                    row+="<td>" + value.description + "</td>";
+                    if (isdone) {
+                        row+="<td>" + "<input type='radio' class='center-block' name='completed' disabled></td>";
+
+                    } else {
+                        row+="<td>" + "<input type='radio' class='center-block' name='completed' value='" + id + "'></td>";
+
+                    }
+                    row+="<td>" + date.toDateString() + "</td></tr>";
+                    table.append(row);
                 }
-                table.append(row);
             });
         }
     });
 }
 
-// function showAll()
-// {
-//     if ($('#task_check').is(':checked')) {
-//         console.log("check");
-//     } else {
-//         console.log("uncheck");
-//     }
-// }
+function validate(value) {
+    var result = false;
+    if (value != null && value != "") {
+        result = true;
+    } else {
+        alert("input something");
+    }
+    return result;
+}
 
-// function add() {
-//     var descr = $('#description').val();
-//         var task = {"id": 0, "description": descr};
-//         $.ajax({
-//             method : "post",
-//             url :  "./add",
-//             data : JSON.stringify(account),
-//             contentType : "application/json",
-//             dataType : "text",
-//             success : function (data) {
-//                 alert(data);
-//                 window.location.href = '../index.html';
-//             }
-//         });
-// }
+//add task
+function add() {
+    var description = $('#formControlTextarea').val();
+    if (validate(description)) {
+        $.ajax({
+            method : "post",
+            url :  "./task",
+            data : {desc : description},
+            dataType : "text",
+            success : function (data) {
+                window.location.href = "/index.html";
+            }
+        });
+    }
+}
+
+function checkChoose(input) {
+    var result = false;
+    if (input.length != 0) {
+        result = true;
+    } else {
+        alert("you did not choose your task");
+    }
+    return result;
+}
+
+// mark as completed your task
+function complete() {
+    var value = $('input[name=completed]:checked');
+    if (checkChoose(value)) {
+        var id = value.val();
+        $.ajax({
+            type : "POST",
+            url : "./complete",
+            data : {id : id},
+            dataType : "text",
+            success : function (data) {
+                location.reload();
+            }
+        });
+    }
+}
+

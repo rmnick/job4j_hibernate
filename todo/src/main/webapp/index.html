@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -15,6 +14,12 @@
         #formControlTextarea {
             width: 600px;
         }
+        .center-block {
+            margin-left:auto;
+            margin-right:auto;
+            vertical-align: middle;
+            display:block;
+        }
 
     </style>
     <title>todo</title>
@@ -22,7 +27,7 @@
 <body>
 <div class="container">
     <h4>
-        Add task to list
+        add task to list
     </h4>
     <div class="row">
         <div class="col-md-8">
@@ -30,33 +35,39 @@
                 <div class="form-group">
                     <label for="formControlTextarea">Description</label>
                     <textarea class="form-control z-depth-1" id="formControlTextarea" rows="4" maxlength="200" placeholder="Write description here..."></textarea>
-                    <button type="submit" class="btn btn-primary">add</button>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary" onclick="add()">add</button>
                 </div>
             </form>
         </div>
         <div class="col-md-4">
             <div class="form-check">
                 <input type="checkbox" class="form-check-input" id="task_check" onclick="getTask()">
-                <label class="form-check-label" for="task_check">show all</label>
+                <label class="form-check-label" for="task_check">show completed</label>
             </div>
         </div>
 </div>
+</div>
 
 <div class="container">
-    <div class="col-sm-offset-2 col-sm-5">
-        <h3>tasks</h3>
-        <table class="table table-bordered" id="table">
-            <thead>
-            <tr>
-                <th>id</th>
-                <th>description</th>
-                <th>isDone</th>
-                <th>created</th>
-            </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
+    <div class="form-group">
+            <h3>tasks</h3>
+            <table class="table table-bordered" id="table">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>description</th>
+                    <th>isDone</th>
+                    <th>created</th>
+                </tr>
+                </thead>
+                <tbody id="tbody">
+                </tbody>
+            </table>
+        <div class="form-group">
+            <button type="button" class="btn btn-primary" onclick="complete()">mark as completed</button>
+        </div>
     </div>
 </div>
 </body>
