@@ -1,4 +1,4 @@
-#Создать todo list
+# Создать todo list
  необходимо создать простое приложение "todo list".
 1. одна таблица tasks в базе todo. id, desc. created, done.
 2. веб приложение должно иметь одну страницу index.html. 

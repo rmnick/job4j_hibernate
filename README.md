@@ -20,3 +20,10 @@
 - find all users
 
 интеграционные тесты через c использованием проксирования
+
+## [todo list](https://github.com/rmnick/job4j_hibernate/tree/master/todo)
+ необходимо создать простое приложение "todo list".
+ - servlets, jquery, ajax 
+ - crud операции посредством Hibernate
+ - postgreSql
+
