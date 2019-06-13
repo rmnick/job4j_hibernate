@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-mapping>
+    <class name="ru.job4j.entity.Car" table="cars">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="name" column="name"/>
+        <property name="yearOfMan" column="year_of_manufact"/>
+        <many-to-one name="bodyCar" column="id_body_car"
+                     class="ru.job4j.entity.BodyCar"/>
+        <many-to-one name="engine" column="id_engine"
+                     class="ru.job4j.entity.Engine"/>
+        <many-to-one name="transmission" column="id_transmission"
+                     class="ru.job4j.entity.Transmission"/>
+    </class>
+</hibernate-mapping>
