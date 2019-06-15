@@ -27,3 +27,8 @@
  - crud операции посредством Hibernate
  - postgreSql
 
+## [chapter_02](https://github.com/rmnick/job4j_hibernate/tree/master/chapter_02)
+реализовать модель связи many-to-one хранилище машин (авто, двигатель, кузов, трансмиссия)
+- на xml
+- на аннотациях.
+- Написать тесты создания, редактирование и удаление.
