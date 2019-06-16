@@ -5,7 +5,7 @@
             <generator class="identity"/>
         </id>
         <property name="name" column="name"/>
-        <property name="yearOfMan" column="year_of_manufact"/>
+        <property name="yearOfMan" column="year_Of_Manufact"/>
         <many-to-one name="bodyCar" column="id_body_car"
                      class="ru.job4j.entity.BodyCar"/>
         <many-to-one name="engine" column="id_engine"

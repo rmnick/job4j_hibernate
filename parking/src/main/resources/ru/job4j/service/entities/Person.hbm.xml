@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-mapping>
+    <class name="ru.job4j.service.entities.Person" table="persons">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="name" column="name"/>
+        <property name="login" column="login"/>
+        <property name="dateBirth" column="date_birth"/>
+        <property name="address" column="address"/>
+        <property name="phone" column="phone"/>
+    </class>
+</hibernate-mapping>
