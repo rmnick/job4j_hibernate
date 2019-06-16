@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../style/ads.css">
+    <title>Ads</title>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-10">
+            <form method="post" action="/ad" enctype="multipart/form-data" onsubmit="return validate()">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <div id="optionTitle">
+                            <h4>
+                                add advt
+                            </h4>
+                        </div>
+                        <div class="form-group">
+                            <label for="brand">brand select</label>
+                            <select class="form-control" id="brand" name="brand" onchange="changeBrand()">
+
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="model">model select</label>
+                            <select class="form-control" id="model" name="model" onchange="changeModel()">
+
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="engine">engine select</label>
+                            <select class="form-control" id="engine" name="engine">
+
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="transmission">transmission select</label>
+                            <select class="form-control" id="transmission" name="transmission">
+
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="bodyCar">car body select</label>
+                            <select class="form-control" id="bodyCar" name="bodyCar">
+
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="mileage">mileage</label>
+                            <div class="input-group mb-3">
+                                <input type="number" class="form-control" id="mileage" name="mileage">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">meters</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="price">price</label>
+                            <div class="input-group mb-3">
+                                <input type="number" class="form-control" id="price" name="price">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">RUB</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="price">year</label>
+                            <div class="input-group mb-3">
+                                <input type="month" class="form-control" id="month" name="month">
+                                <span class="input-group-text">month/year</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">accept</button>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="form-group" id="load-form">
+                            <label for="file">load picture</label>
+                            <!--<input type="file" class="form-control-file" id="load-pic">-->
+                            <input type="file" class="form-control-file" id="file" name="files[]" multiple />
+                            <output id="output"></output>
+                        </div>
+                        <div class="form-group" id="desc">
+                            <label for="description">description</label>
+                            <textarea class="form-control" id="description" name="description" rows="6" maxlength="300" placeholder="write your description"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group" id="signout-form">
+                <button type="button" id="signout" class="btn btn-primary" onclick="out()">sign out</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="../scripts/js.cookie.js"></script>
+<script src="../scripts/ads.js"></script>
+
+<!--Bootstrap script-->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

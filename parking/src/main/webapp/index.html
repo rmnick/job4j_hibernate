@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style/index.css">
+    <title>car parking</title>
+</head>
+<body>
+<!-- modal window -->
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+<!--                <h4 class="modal-title">Sign in</h4>-->
+            </div>
+            <!-- body of modal window -->
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="login">login</label>
+                        <input type="text" class="form-control" maxlength="15" id="login" placeholder="enter your login">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">password</label>
+                        <input type="password" class="form-control" maxlength="20" id="password" placeholder="enter your password" name="password">
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="enter()">enter</button>
+                </form>
+            </div>
+            <!-- footer -->
+            <div class="modal-footer">
+                <div class="row">
+                    <button type="button" id="reg" class="btn btn-primary">registration</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- main part -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2">
+            <div id="optionTitle">
+                <h4>
+                    select options
+                </h4>
+            </div>
+            <form>
+                <div class="form-group">
+                    <label for="brand">brand select</label>
+                    <select class="form-control" id="brand" name="brand" onchange="changeBrand()">
+
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="model">model select</label>
+                    <select class="form-control" id="model" name="model">
+
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="select one">some select</label>
+                    <select class="form-control" id="select one">
+
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="select two">some select</label>
+                    <select class="form-control" id="select two">
+
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="select three">some select</label>
+                    <select class="form-control" id="select three">
+
+                    </select>
+                </div>
+                <div class="form-group" id="photoDiv">
+                    <input type="checkbox" class="form-check-input" id="photo">
+                    <label class="form-check-label" for="photo">show only with photo</label>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary" id="search" onclick="searchByOptions()">search</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-sm-8">
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <select class="form-control" id="sort" onchange="searchByOptions()">
+                            <option>sort by newest first</option>
+                            <option>sort by oldest first</option>
+                            <option>show for the last day</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <h4>
+                    ads
+                </h4>
+                <table class="table table-condensed" id="table">
+                    <thead>
+                    <tr>
+                        <th style="width: 30%">pic</th>
+                        <th style="width: 60%">description</th>
+                        <th style="width: 10%">sold</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tbody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div>
+                <div class="form-group" id="in">
+                    <a href="#myModal" id="signin" class="btn btn-primary" data-toggle="modal">sign in</a>
+                </div>
+                <div class="form-group" id="out">
+                </div>
+            </div>
+            <div>
+                <div class="form-group">
+                    <button type="button" id="add" class="btn btn-primary">add advert</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="scripts/js.cookie.js"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>-->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="scripts/start.js"></script>
+<script src="scripts/showAdvt.js"></script>
+</body>
+</html>

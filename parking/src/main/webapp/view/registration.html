@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../style/registration.css">
+    <title>registration</title>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="col-sm-6">
+        <form>
+            <div class="form-group">
+                <label for="username">Full name</label>
+                <input type="text" class="form-control" maxlength="50" id="username" placeholder="John Doe Jr">
+            </div>
+            <div class="form-group">
+                <label for="login">Login:</label>
+                <input type="text" class="form-control" maxlength="15" id="login" placeholder="login" name="login">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" maxlength="20" id="password" placeholder="Enter your password" name="password">
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" maxlength="50" id="email" placeholder="jonDoe@gmail.com" name="email">
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone number</label>
+                <input type="text" class="form-control" id="phone" placeholder="79XXXXXXXXX">
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-primary" onclick="registration()">accept</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="../scripts/js.cookie.js"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>-->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="../scripts/registration.js"></script>
+</body>
+</html>

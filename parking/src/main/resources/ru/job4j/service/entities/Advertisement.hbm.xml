@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-mapping>
+    <class name="ru.job4j.service.entities.Advertisement" table="ads">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="createDate" column="create_date"/>
+        <property name="picturePath" column="path_picture"/>
+        <property name="description" column="description"/>
+        <property name="sold" column="sold"/>
+        <many-to-one name="person" column="id_person"
+                     class="ru.job4j.service.entities.Person"/>
+        <many-to-one name="car" column="id_car" class="ru.job4j.service.entities.Car" cascade="all" unique="true"/>
+    </class>
+</hibernate-mapping>
