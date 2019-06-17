@@ -7,50 +7,26 @@ import java.util.Objects;
 public class Person {
     private int id;
     private String name;
-    private String address;
+    private String email;
     private String login;
     private String phone;
-    private Timestamp dateBirth;
-    private List<Car> cars;
+    private List<Advertisement> ads;
 
     public Person() {
     }
 
     public Person(final int id,
                   final String name,
-                  final String address,
+                  final String email,
                   final String login,
                   final String phone,
-                  final Timestamp dateBirth) {
+                  final List<Advertisement> ads) {
         this.id = id;
         this.name = name;
         this.login = login;
-        this.address = address;
+        this.email = email;
         this.phone = phone;
-        this.dateBirth = dateBirth;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Person person = (Person) o;
-        return id == person.id
-                && Objects.equals(name, person.name)
-                && Objects.equals(address, person.address)
-                && Objects.equals(login, person.login)
-                && Objects.equals(phone, person.phone)
-                && Objects.equals(dateBirth, person.dateBirth)
-                && Objects.equals(cars, person.cars);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, address, login, phone, dateBirth, cars);
+        this.ads = ads;
     }
 
     public int getId() {
@@ -69,12 +45,12 @@ public class Person {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
+    public String getEmail() {
+        return email;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getLogin() {
@@ -93,19 +69,11 @@ public class Person {
         this.phone = phone;
     }
 
-    public Timestamp getDateBirth() {
-        return dateBirth;
+    public List<Advertisement> getAds() {
+        return ads;
     }
 
-    public void setDateBirth(Timestamp dateBirth) {
-        this.dateBirth = dateBirth;
-    }
-
-    public List<Car> getCars() {
-        return cars;
-    }
-
-    public void setCars(List<Car> cars) {
-        this.cars = cars;
+    public void setAds(List<Advertisement> ads) {
+        this.ads = ads;
     }
 }

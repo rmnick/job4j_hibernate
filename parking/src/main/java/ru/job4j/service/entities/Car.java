@@ -1,56 +1,16 @@
 package ru.job4j.service.entities;
 
 import java.sql.Timestamp;
-import java.util.Objects;
 
 public class Car {
     private int id;
-    private String name;
-    private Timestamp yearOfManufact;
-    private Engine engine;
-    private BodyCar bodyCar;
-    private Transmission transmission;
-    private Person person;
+    private Model model;
+    private Timestamp year;
+    private int mileage;
+    private float price;
 
     public Car() {
-    }
 
-    public Car(final int id,
-               final String name,
-               final Timestamp yearOfManufact,
-               final Engine engine,
-               final BodyCar bodyCar,
-               final Transmission transmission,
-               final Person person) {
-        this.id = id;
-        this.name = name;
-        this.bodyCar = bodyCar;
-        this.engine = engine;
-        this.transmission = transmission;
-        this.person = person;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Car car = (Car) o;
-        return id == car.id
-                && Objects.equals(name, car.name)
-                && Objects.equals(yearOfManufact, car.yearOfManufact)
-                && Objects.equals(engine, car.engine)
-                && Objects.equals(bodyCar, car.bodyCar)
-                && Objects.equals(transmission, car.transmission)
-                && Objects.equals(person, car.person);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, yearOfManufact, engine, bodyCar, transmission, person);
     }
 
     public int getId() {
@@ -61,51 +21,35 @@ public class Car {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Model getModel() {
+        return model;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setModel(Model model) {
+        this.model = model;
     }
 
-    public Timestamp getYearOfManufact() {
-        return yearOfManufact;
+    public Timestamp getYear() {
+        return year;
     }
 
-    public void setYearOfManufact(Timestamp yearOfManufact) {
-        this.yearOfManufact = yearOfManufact;
+    public void setYear(Timestamp year) {
+        this.year = year;
     }
 
-    public Engine getEngine() {
-        return engine;
+    public int getMileage() {
+        return mileage;
     }
 
-    public void setEngine(Engine engine) {
-        this.engine = engine;
+    public void setMileage(int mileage) {
+        this.mileage = mileage;
     }
 
-    public BodyCar getBodyCar() {
-        return bodyCar;
+    public float getPrice() {
+        return price;
     }
 
-    public void setBodyCar(BodyCar bodyCar) {
-        this.bodyCar = bodyCar;
-    }
-
-    public Transmission getTransmission() {
-        return transmission;
-    }
-
-    public void setTransmission(Transmission transmission) {
-        this.transmission = transmission;
-    }
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setPrice(float price) {
+        this.price = price;
     }
 }

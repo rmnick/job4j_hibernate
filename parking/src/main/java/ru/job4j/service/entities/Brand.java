@@ -1,12 +1,10 @@
 package ru.job4j.service.entities;
 
-
-public class Engine {
+public class Brand {
     private int id;
     private String name;
-    private float volume;
 
-    public Engine() {
+    public Brand() {
     }
 
     public int getId() {
@@ -23,13 +21,5 @@ public class Engine {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public float getVolume() {
-        return volume;
-    }
-
-    public void setVolume(float volume) {
-        this.volume = volume;
     }
 }

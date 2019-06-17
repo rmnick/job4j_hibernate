@@ -13,5 +13,8 @@
         <mapping resource="ru/job4j/service/entities/Engine.hbm.xml"/>
         <mapping resource="ru/job4j/service/entities/Transmission.hbm.xml"/>
         <mapping resource="ru/job4j/service/entities/Person.hbm.xml"/>
+        <mapping resource="ru/job4j/service/entities/Model.hbm.xml"/>
+        <mapping resource="ru/job4j/service/entities/Brand.hbm.xml"/>
+        <mapping resource="ru/job4j/service/entities/Advertisement.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

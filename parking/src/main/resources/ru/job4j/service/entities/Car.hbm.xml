@@ -4,15 +4,10 @@
         <id name="id" column="id">
             <generator class="identity"/>
         </id>
-        <property name="name" column="name"/>
-        <property name="yearOfManufact" column="yearOfManufact"/>
-        <many-to-one name="bodyCar" column="id_body_car"
-                     class="ru.job4j.service.entities.BodyCar"/>
-        <many-to-one name="engine" column="id_engine"
-                     class="ru.job4j.service.entities.Engine"/>
-        <many-to-one name="transmission" column="id_transmission"
-                     class="ru.job4j.service.entities.Transmission"/>
-        <many-to-one name="person" column="id_person"
-                     class="ru.job4j.service.entities.Person"/>
+        <property name="mileage" column="mileage"/>
+        <property name="year" column="year"/>
+        <property name="price" column="price"/>
+        <many-to-one name="model" column="id_model"
+                     class="ru.job4j.service.entities.Model"/>
     </class>
 </hibernate-mapping>

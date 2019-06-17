@@ -2,9 +2,96 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <style>
+        #signin {
+            margin-top: 10px !important;
+        }
+    </style>
     <title>cars</title>
 </head>
 <body>
-hey from parking
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2">
+            <h4>
+                select options
+            </h4>
+            <form>
+                <div class="form-group">
+                    <label for="brand">brand select</label>
+                    <select class="form-control" id="brand">
+                        <option>1</option>
+                        <option>2</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="model">model select</label>
+                    <select class="form-control" id="model">
+                        <option>1</option>
+                        <option>2</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="engine">engine select</label>
+                    <select class="form-control" id="engine">
+                        <option>1</option>
+                        <option>2</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="transmission">transmission select</label>
+                    <select class="form-control" id="transmission">
+                        <option>1</option>
+                        <option>2</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="bodyCar">car body select</label>
+                    <select class="form-control" id="bodyCar">
+                        <option>1</option>
+                        <option>2</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary">search</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-9">
+            <h4>
+                ads
+            </h4>
+            <table class="table table-condensed" id="table">
+                <thead>
+                <tr>
+                    <th>pic</th>
+                    <th>description</th>
+                    <th>sold</th>
+                </tr>
+                </thead>
+                <tbody id="tbody">
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-1">
+            <div class="form-group">
+                <button type="button" id="signin" class="btn btn-primary">sign in</button>
+            </div>
+            <div class="form-group">
+                <button type="button" id="signout" class="btn btn-primary">sign out</button>
+            </div>
+            <div class="form-group">
+                <button type="button" id="add" class="btn btn-primary">add advert</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
