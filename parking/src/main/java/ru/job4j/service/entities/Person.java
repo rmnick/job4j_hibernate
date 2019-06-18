@@ -10,6 +10,7 @@ public class Person {
     private String email;
     private String login;
     private String phone;
+    private String password;
     private List<Advertisement> ads;
 
     public Person() {
@@ -20,12 +21,14 @@ public class Person {
                   final String email,
                   final String login,
                   final String phone,
+                  final String password,
                   final List<Advertisement> ads) {
         this.id = id;
         this.name = name;
         this.login = login;
         this.email = email;
         this.phone = phone;
+        this.password = password;
         this.ads = ads;
     }
 
@@ -75,5 +78,13 @@ public class Person {
 
     public void setAds(List<Advertisement> ads) {
         this.ads = ads;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

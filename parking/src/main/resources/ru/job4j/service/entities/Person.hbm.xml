@@ -8,5 +8,11 @@
         <property name="login" column="login"/>
         <property name="phone" column="phone"/>
         <property name="email" column="email"/>
+        <property name="password" column="password"/>
+
+        <bag name="ads" inverse="true" lazy="false">
+            <key column="id_person" not-null="true"/>
+            <one-to-many class="ru.job4j.service.entities.Advertisement"/>
+        </bag>
     </class>
 </hibernate-mapping>

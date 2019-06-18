@@ -24,7 +24,8 @@ create table if not exists persons(
     name varchar (50),
     login varchar (50),
     email varchar (50),
-    phone varchar (50)
+    phone varchar (50),
+    password varchar (50)
 );
 
 create table if not exists models(
