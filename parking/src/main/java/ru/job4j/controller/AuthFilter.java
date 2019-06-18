@@ -17,6 +17,7 @@ public class AuthFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         try {
             if (req.getRequestURI().contains("/index.html")) {
+                LOG.info("in filter");
                 chain.doFilter(req, resp);
             } else {
                 HttpSession session = req.getSession(false);

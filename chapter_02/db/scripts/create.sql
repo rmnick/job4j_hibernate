@@ -16,7 +16,7 @@ create table if not exists body_car(
 create table if not exists cars(
 	id serial primary key,
 	name varchar(500),
-	yearOfManufact timestamp,
+	year_Of_Manufact timestamp,
 	id_engine int references engine(id),
 	id_transmission int references transmission(id),
 	id_body_car int references body_car(id)

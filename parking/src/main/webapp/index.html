@@ -4,49 +4,41 @@
     <meta charset="UTF-8">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style/index.css">
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="scripts/js.cookie.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="scripts/start.js"></script>
-    <style>
-        #signin {
-            margin-top: 10px !important;
-        }
-
-        #reg {
-            margin-right: 5px; !important;
-        }
-
-    </style>
     <title>cars</title>
 </head>
 <body>
-<!-- HTML-код модального окна -->
+<!-- modal window -->
 <div id="myModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
-            <!-- Заголовок модального окна -->
+            <!-- header -->
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 <!--                <h4 class="modal-title">Sign in</h4>-->
             </div>
-            <!-- Основное содержимое модального окна -->
+            <!-- body of modal window -->
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <label for="username">login</label>
-                        <input type="text" class="form-control" id="username" placeholder="login">
+                        <label for="login">login</label>
+                        <input type="text" class="form-control" id="login" placeholder="enter your login">
                     </div>
                     <div class="form-group">
                         <label for="password">password</label>
-                        <input type="password" class="form-control" id="password" placeholder="Enter your password" name="password">
+                        <input type="password" class="form-control" id="password" placeholder="enter your password" name="password">
                     </div>
-                    <button type="button" class="btn btn-primary">enter</button>
+                    <button type="button" class="btn btn-primary" onclick="enter()">enter</button>
                 </form>
             </div>
-            <!-- Футер модального окна -->
+            <!-- footer -->
             <div class="modal-footer">
                 <div class="row">
                     <button type="button" id="reg" class="btn btn-primary">registration</button>

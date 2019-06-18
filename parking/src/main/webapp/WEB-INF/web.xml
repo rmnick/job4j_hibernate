@@ -12,4 +12,12 @@
         <filter-name>SessionFilter</filter-name>
         <url-pattern>/auth</url-pattern>
     </filter-mapping>
+    <servlet>
+        <servlet-name>EnterServlet</servlet-name>
+        <servlet-class>ru.job4j.controller.EnterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EnterServlet</servlet-name>
+        <url-pattern>/enter</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -16,6 +16,10 @@ public class Person {
     public Person() {
     }
 
+    public Person(final String login, final String password) {
+        this(0, null, null, login, null, password, null);
+    }
+
     public Person(final int id,
                   final String name,
                   final String email,
