@@ -29,10 +29,14 @@ public class EnterServlet extends HttpServlet {
         try {
             reader = req.getReader();
             person = mapper.readValue(reader.readLine(), Person.class);
-//            HttpSession session = req.getSession(true);
-//            session.setAttribute("login", person.getLogin());
+            System.out.println(person.getLogin() + " " + person.getPassword());
+            HttpSession session = req.getSession(true);
+            session.setAttribute("login", person.getLogin());
             Cookie cookieLog = new Cookie("login", person.getLogin());
+            Cookie cookiePassword = new Cookie("password", person.getPassword());
+            cookiePassword.setMaxAge(-1);
             resp.addCookie(cookieLog);
+            resp.addCookie(cookiePassword);
             pw = resp.getWriter();
             pw.append("index.html");
             pw.flush();

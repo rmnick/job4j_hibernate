@@ -1,28 +1,49 @@
-function clickChange() {
-
-}
 
 $(function () {
     var loginSession = Cookies.get("login");
-    console.log(loginSession);
+    var passSession = Cookies.get("password");
     $('#login').val(loginSession);
+    $('#password').val(passSession);
+    checkSession(function(login) {
+        if (login != "") {
+            clickon();
+        }
+    });
+});
+
+
+$(document).ready(function () {
+    $("#add").click(function () {
+        checkSession(function (login) {
+            if (login != "") {
+                window.location.href = "view/ads.html"
+            } else {
+                $("#signin").click();
+            }
+        })
+    });
 });
 
 function clickon() {
-    console.log('hey');
     $('#signin').hide();
     $('#out').html('<button type="button" id="signout" class="btn btn-primary" onclick="clickout()">sign out</button>');
 }
 
 function clickout() {
-    console.log('heyhey');
-    $('#signout').hide();
-    $('#in').html('<button type="button" id="signin" class="btn btn-primary" onclick="clickon()">sign in</button>');
+    $.ajax({
+        method : "get",
+        url : "./out",
+        success : function (data) {
+            $('#signout').hide();
+            $('#in').html('<button type="button" id="signin" class="btn btn-primary" onclick="clickon()">sign in</button>');
+            window.location.href = "/index.html";
+        }
+    });
 }
 
 function enter() {
     var login = $('#login').val();
-    var password = $('#pass').val();
+    var password = $('#password').val();
     // if (!validName(userName.split(" "))) {
     //     alert("please enter correct name");
     // } else if (!validPhone(userPhone)) {
@@ -40,8 +61,19 @@ function enter() {
             success : function (data) {
                 // alert(data);
                 // window.location.href = '../index.html';
-                console.log(data);
+                window.location.href = "/" + data + ";"
             }
         });
     // }
+}
+
+function checkSession(checkLogin) {
+    $.ajax({
+       method : "get",
+        url : "./check",
+       dataType : "text",
+       success : function (response) {
+           checkLogin(response);
+       }
+    });
 }

@@ -20,4 +20,28 @@
         <servlet-name>EnterServlet</servlet-name>
         <url-pattern>/enter</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>SessionEnd</servlet-name>
+        <servlet-class>ru.job4j.controller.SessionEnd</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SessionEnd</servlet-name>
+        <url-pattern>/out</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>CheckSession</servlet-name>
+        <servlet-class>ru.job4j.controller.SessionCheck</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CheckSession</servlet-name>
+        <url-pattern>/check</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AdServlet</servlet-name>
+        <servlet-class>ru.job4j.controller.AdServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdServlet</servlet-name>
+        <url-pattern>/ad</url-pattern>
+    </servlet-mapping>
 </web-app>
