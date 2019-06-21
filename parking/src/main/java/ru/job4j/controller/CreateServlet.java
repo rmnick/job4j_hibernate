@@ -1,28 +1,27 @@
 package ru.job4j.controller;
 
-
+import org.codehaus.jackson.map.ObjectMapper;
+import ru.job4j.service.entities.Person;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import java.io.BufferedReader;
 import java.io.IOException;
 
-public class SessionCheck extends HttpServlet {
+public class CreateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("!!!!! in check");
-        resp.setContentType("text/plain");
-        HttpSession session = req.getSession(false);
-        if (session != null && session.getAttribute("login") != null) {
-            System.out.println(session.getAttribute("login"));
-            resp.getWriter().write(session.getAttribute("login").toString());
-        }
+        super.doGet(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        BufferedReader br = req.getReader();
+        ObjectMapper mapper = new ObjectMapper();
+        Person person = mapper.readValue(br.readLine(), Person.class);
+        System.out.println(person);
+        resp.getWriter().write(person.getLogin());
     }
 }

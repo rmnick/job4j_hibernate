@@ -20,6 +20,10 @@ public class Person {
         this(0, null, null, login, null, password, null);
     }
 
+    public Person(final String name, final String login, final String password, final String email, final String phone) {
+        this(0, name, email, login, phone, password, null);
+    }
+
     public Person(final int id,
                   final String name,
                   final String email,
@@ -90,5 +94,11 @@ public class Person {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Person{name : %s, login : %s, password : %s, email : %s, phone : %s}",
+                this.name, this.login, this.password, this.email, this.phone);
     }
 }

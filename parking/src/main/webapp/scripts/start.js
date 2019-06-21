@@ -16,12 +16,15 @@ $(document).ready(function () {
     $("#add").click(function () {
         checkSession(function (login) {
             if (login != "") {
-                window.location.href = "view/ads.html"
+                window.location.href = "view/ads.html";
             } else {
                 $("#signin").click();
             }
         })
     });
+    $("#reg").click(function () {
+        window.location.href = "view/registration.html";
+    })
 });
 
 function clickon() {
@@ -44,13 +47,11 @@ function clickout() {
 function enter() {
     var login = $('#login').val();
     var password = $('#password').val();
-    // if (!validName(userName.split(" "))) {
-    //     alert("please enter correct name");
-    // } else if (!validPhone(userPhone)) {
-    //     alert("please enter correct phone");
-    // } else if (!userCheck(userName, userPhone)) {
-    //     alert("the phone number is already registered in another name");
-    // } else {
+    if (!validLogin(login)) {
+        alert("please enter correct login");
+    } else if (!validPass(password)) {
+        alert("please enter password");
+    } else {
         var person = {"login": login, "password": password};
         $.ajax({
             method : "post",
@@ -59,12 +60,23 @@ function enter() {
             contentType : "application/json",
             dataType : "text",
             success : function (data) {
-                // alert(data);
-                // window.location.href = '../index.html';
-                window.location.href = "/" + data + ";"
+                if (data != "") {
+                    window.location.href = "/" + data + ";"
+                } else {
+                    alert("please check your login or password");
+                }
             }
         });
-    // }
+    }
+}
+
+function validLogin(login) {
+    var regEx = /[^-\s][a-zA-Z0-9-_\\s]*$/;
+    return regEx.test(login);
+}
+
+function validPass(password) {
+    return password != '';
 }
 
 function checkSession(checkLogin) {

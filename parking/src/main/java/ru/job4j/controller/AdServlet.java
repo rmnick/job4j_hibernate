@@ -15,12 +15,5 @@ public class AdServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        System.out.println("in servlet ad!!!");
-//        HttpSession session = req.getSession(false);
-//        if (session != null && session.getAttribute("login") != null) {
-//            System.out.println("in if add!!!");
-//            resp.sendRedirect("/view/ads.html");
-//        }
-
     }
 }
