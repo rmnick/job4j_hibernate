@@ -1,6 +1,7 @@
 package ru.job4j.controller;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import ru.job4j.service.Service;
 import ru.job4j.service.entities.Person;
 
 import javax.servlet.ServletException;
@@ -11,6 +12,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 public class CreateServlet extends HttpServlet {
+    private final Service service = Service.getInstance();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doGet(req, resp);
@@ -22,6 +25,10 @@ public class CreateServlet extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
         Person person = mapper.readValue(br.readLine(), Person.class);
         System.out.println(person);
-        resp.getWriter().write(person.getLogin());
+        if (service.validate(person)) {
+            resp.getWriter().write("succeed");
+        } else {
+            resp.getWriter().write("failed");
+        }
     }
 }

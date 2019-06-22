@@ -30,10 +30,7 @@ function registration() {
                 // } else {
                 //     alert("please check your login or password");
                 // }
-                if (data != "") {
-                    var res = data.split(" ");
-                    console.log(res[0]);
-                }
+                console.log(data);
             }
         });
     }

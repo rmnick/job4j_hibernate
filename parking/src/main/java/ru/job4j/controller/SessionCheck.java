@@ -20,9 +20,4 @@ public class SessionCheck extends HttpServlet {
             resp.getWriter().write(session.getAttribute("login").toString());
         }
     }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-    }
 }

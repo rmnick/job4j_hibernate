@@ -78,3 +78,5 @@ insert into models (name, id_brand, id_engine, id_transmission, id_body_car) val
 ('M5', 4, 6, 2, 1),
 ('X1', 4, 4, 2, 2);
 
+insert into persons (name, login, email, phone, password) values ('Test Test Test', 'test', 'test@test.test', '79068510863', 'test');
+

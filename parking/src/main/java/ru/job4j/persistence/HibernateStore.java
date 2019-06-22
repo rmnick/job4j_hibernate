@@ -1,20 +1,27 @@
 package ru.job4j.persistence;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import ru.job4j.service.entities.Car;
+import ru.job4j.service.entities.Person;
 
 import java.util.List;
 import java.util.function.Function;
 
 public class HibernateStore {
+    private final static HibernateStore INSTANCE = new HibernateStore(HibernateSessionFactoryUtil.getFactory());
     private final static Logger LOG = Logger.getLogger(HibernateStore.class.getName());
     private SessionFactory sf;
 
-    public HibernateStore(final SessionFactory sf) {
+    private HibernateStore(final SessionFactory sf) {
         this.sf = sf;
+    }
+
+    public static HibernateStore getInstance() {
+        return INSTANCE;
     }
 
     private <T> T tx(final Function<Session, T> command) {
@@ -63,6 +70,16 @@ public class HibernateStore {
     public List<Car> getAllCar() {
         return tx(session -> {
             return session.createCriteria(Car.class).list();
+        });
+    }
+
+    public Person getPersonByLogin(Person person) {
+        return tx(session -> {
+           Person result;
+           Query query = session.createQuery("from Person where login=:login");
+           query.setParameter("login", person.getLogin());
+           result = (Person) query.uniqueResult();
+           return result;
         });
     }
 }
