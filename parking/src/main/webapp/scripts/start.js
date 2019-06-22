@@ -6,7 +6,7 @@ $(function () {
     $('#password').val(passSession);
     checkSession(function(login) {
         if (login != "") {
-            clickon();
+            clickon(login);
         }
     });
 });
@@ -27,9 +27,18 @@ $(document).ready(function () {
     })
 });
 
-function clickon() {
+function clickon(data) {
     $('#signin').hide();
-    $('#out').html('<button type="button" id="signout" class="btn btn-primary" onclick="clickout()">sign out</button>');
+    $('#out').html('<div class="btn-group" id="signout">\n' +
+        '                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\n'
+        + data + '\n' +
+        '                        </button>\n' +
+        '                        <div class="dropdown-menu">\n' +
+        '                            <button class="dropdown-item" onclick="clickout()">Profile</button>\n' +
+        '                            <button class="dropdown-item" onclick="clickout()">My ads</button>\n' +
+        '                            <button class="dropdown-item" onclick="clickout()">Sign out</button>\n' +
+        '                        </div>\n' +
+        '                    </div>')
 }
 
 function clickout() {
@@ -38,7 +47,8 @@ function clickout() {
         url : "./out",
         success : function (data) {
             $('#signout').hide();
-            $('#in').html('<button type="button" id="signin" class="btn btn-primary" onclick="clickon()">sign in</button>');
+            //just for smooth transition
+            $('#in').html('<button type="button" class="btn btn-primary">sign in</button>');
             window.location.href = "/index.html";
         }
     });

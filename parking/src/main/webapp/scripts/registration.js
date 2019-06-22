@@ -17,7 +17,6 @@ function registration() {
         alert("please enter correct phone")
     } else {
         var person = {"name" : name, "email" : email, "login": login, "phone" : phone, "password" : password};
-        console.log("success");
         $.ajax({
             method : "post",
             url :  "../create",
@@ -25,12 +24,11 @@ function registration() {
             contentType : "application/json",
             dataType : "text",
             success : function (data) {
-                // if (data != "") {
-                //     window.location.href = "/" + data + ";"
-                // } else {
-                //     alert("please check your login or password");
-                // }
-                console.log(data);
+                if (data != "") {
+                    checkExist(data);
+                } else {
+                    alert("sorry, something went wrong, try again later");
+                }
             }
         });
     }
@@ -65,6 +63,43 @@ function validPhone(phone) {
 
 function validPass(password) {
     return password != '' && password.length > 3;
+}
+
+function getMap() {
+    var map;
+    var login = "login";
+    var success = "success";
+    var phone = "phone";
+    var email = "email";
+
+    var loginValue = $('#login').val();
+    var phoneValue = $('#phone').val();
+    var emailValue = $('#email').val();
+
+    map = new Map();
+    map.set(login, failed(login, loginValue));
+    map.set(phone, failed(phone, phoneValue));
+    map.set(email, failed(email, emailValue));
+    map.set(success, succeed());
+
+    return map;
+}
+
+function failed(data, name) {
+    return "this " + data + " " + "\"" + name + "\"" + " is already exist";
+}
+
+function succeed() {
+    return "congratulations you are registered";
+}
+
+function checkExist(data) {
+    var map = getMap();
+    var result = map.get(data);
+    alert(result);
+    if (result == succeed()) {
+        window.location.href = "../index.html";
+    }
 }
 
 // function test() {

@@ -2,6 +2,7 @@ package ru.job4j.controller;
 
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
+import ru.job4j.service.Service;
 import ru.job4j.service.entities.Person;
 
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import java.io.PrintWriter;
 
 public class EnterServlet extends HttpServlet {
     public final static Logger LOG = Logger.getLogger(EnterServlet.class.getName());
+    private final Service service = Service.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -20,26 +22,25 @@ public class EnterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        BufferedReader reader;
-        PrintWriter pw;
-        ObjectMapper mapper = new ObjectMapper();
-        Person person;
         try {
-            reader = req.getReader();
-            person = mapper.readValue(reader.readLine(), Person.class);
-            System.out.println(person.getLogin() + " " + person.getPassword());
-            HttpSession session = req.getSession(true);
-            session.setAttribute("login", person.getLogin());
-            Cookie cookieLog = new Cookie("login", person.getLogin());
-            Cookie cookiePassword = new Cookie("password", person.getPassword());
-            cookiePassword.setMaxAge(-1);
-            resp.addCookie(cookieLog);
-            resp.addCookie(cookiePassword);
-            pw = resp.getWriter();
-            pw.append("index.html");
-            pw.flush();
-            reader.close();
-            pw.close();
+            BufferedReader reader = req.getReader();
+            PrintWriter pw = resp.getWriter();
+            ObjectMapper mapper = new ObjectMapper();
+            Person person = mapper.readValue(reader.readLine(), Person.class);
+            if (service.validateEnter(person)) {
+                HttpSession session = req.getSession(true);
+                session.setAttribute("login", person.getLogin());
+                Cookie cookieLog = new Cookie("login", person.getLogin());
+                Cookie cookiePassword = new Cookie("password", person.getPassword());
+                cookiePassword.setMaxAge(-1);
+                resp.addCookie(cookieLog);
+                resp.addCookie(cookiePassword);
+                pw.write("index.html");
+                reader.close();
+                pw.close();
+            } else {
+                pw.write("");
+            }
         } catch (IOException e) {
             LOG.error(e.getMessage(), e);
         }

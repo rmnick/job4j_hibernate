@@ -8,6 +8,7 @@
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="scripts/js.cookie.js"></script>
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -51,9 +52,11 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-2">
-            <h4>
-                select options
-            </h4>
+            <div id="optionTitle">
+                <h4>
+                    select options
+                </h4>
+            </div>
             <form>
                 <div class="form-group">
                     <label for="brand">brand select</label>
@@ -96,20 +99,36 @@
             </form>
         </div>
         <div class="col-sm-8">
-            <h4>
-                ads
-            </h4>
-            <table class="table table-condensed" id="table">
-                <thead>
-                <tr>
-                    <th>pic</th>
-                    <th>description</th>
-                    <th>sold</th>
-                </tr>
-                </thead>
-                <tbody id="tbody">
-                </tbody>
-            </table>
+            <div class="row">
+                <div class="col-sm-8">
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <select class="form-control" id="sort">
+                            <option>sort by newest first</option>
+                            <option>sort by oldest first</option>
+                            <option>show for the last day</option>
+                            <option>show for the last week</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <h4>
+                    ads
+                </h4>
+                <table class="table table-condensed" id="table">
+                    <thead>
+                    <tr>
+                        <th>pic</th>
+                        <th>description</th>
+                        <th>sold</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tbody">
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="col-sm-2">
             <div>
@@ -117,7 +136,6 @@
                     <a href="#myModal" id="signin" class="btn btn-primary" data-toggle="modal">sign in</a>
                 </div>
                 <div class="form-group" id="out">
-                    <!--<button type="button" id="signout" class="btn btn-primary" onclick="clickout()>sign out</button>-->
                 </div>
             </div>
             <div>

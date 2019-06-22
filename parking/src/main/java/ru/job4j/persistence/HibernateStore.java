@@ -82,4 +82,24 @@ public class HibernateStore {
            return result;
         });
     }
+
+    public Person getPersonByPhone(Person person) {
+        return tx(session -> {
+            Person result;
+            Query query = session.createQuery("from Person where phone=:phone");
+            query.setParameter("phone", person.getPhone());
+            result = (Person) query.uniqueResult();
+            return result;
+        });
+    }
+
+    public Person getPersonByEmail(Person person) {
+        return tx(session -> {
+            Person result;
+            Query query = session.createQuery("from Person where email=:email");
+            query.setParameter("email", person.getEmail());
+            result = (Person) query.uniqueResult();
+            return result;
+        });
+    }
 }
