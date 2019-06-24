@@ -4,18 +4,100 @@
     <meta charset="UTF-8">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="../scripts/js.cookie.js"></script>
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>-->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="../scripts/ads.js"></script>
+    <link rel="stylesheet" href="../style/ads.css">
     <title>Ads</title>
 </head>
 <body>
-<div id="login">
+<div class="container-fluid">
+    <form>
+        <div class="row">
+            <div class="col-sm-6">
+                <div id="optionTitle">
+                    <h4>
+                        add advt
+                    </h4>
+                </div>
+                <div class="form-group">
+                    <label for="brand">brand select</label>
+                    <select class="form-control" id="brand">
+                        <option>1</option>
+                        <option>2</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="model">model select</label>
+                    <select class="form-control" id="model">
+                        <option>1</option>
+                        <option>2</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="engine">engine select</label>
+                    <select class="form-control" id="engine">
+                        <option>1</option>
+                        <option>2</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="transmission">transmission select</label>
+                    <select class="form-control" id="transmission">
+                        <option>1</option>
+                        <option>2</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="bodyCar">car body select</label>
+                    <select class="form-control" id="bodyCar">
+                        <option>1</option>
+                        <option>2</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="mileage">mileage</label>
+                    <div class="input-group mb-3">
+                        <input type="number" class="form-control" id="mileage">
+                        <div class="input-group-append">
+                            <span class="input-group-text">meters</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="price">price</label>
+                    <div class="input-group mb-3">
+                        <input type="number" class="form-control" id="price">
+                        <div class="input-group-append">
+                            <span class="input-group-text">RUB</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="year">year</label>
+                    <div class="input-group mb-3">
+                        <input type="number" class="form-control" id="year" step="1" min="1908" max="2019">
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group" id="upload-pic">
+                    <input type="file" id="myFile" name="myFile"/>
+                </div>
+            </div>
+            <div class="col-sm-2">
+            </div>
+        </div>
+    </form>
 
 </div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="../scripts/js.cookie.js"></script>
+<script src="../scripts/ads.js"></script>
+
+<!--Bootstrap script-->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>
