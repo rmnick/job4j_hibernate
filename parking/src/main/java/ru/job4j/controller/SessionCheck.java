@@ -13,7 +13,6 @@ public class SessionCheck extends HttpServlet {
         resp.setContentType("text/plain");
         HttpSession session = req.getSession(false);
         if (session != null && session.getAttribute("login") != null) {
-            System.out.println(session.getAttribute("login"));
             resp.getWriter().write(session.getAttribute("login").toString());
         }
     }

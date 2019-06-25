@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="container-fluid">
-    <form>
+    <form method="post" action="/ad" enctype="multipart/form-data">
         <div class="row">
             <div class="col-sm-6">
                 <div id="optionTitle">
@@ -19,35 +19,35 @@
                 </div>
                 <div class="form-group">
                     <label for="brand">brand select</label>
-                    <select class="form-control" id="brand">
+                    <select class="form-control" id="brand" name="brand">
                         <option>1</option>
                         <option>2</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="model">model select</label>
-                    <select class="form-control" id="model">
+                    <select class="form-control" id="model" name="model">
                         <option>1</option>
                         <option>2</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="engine">engine select</label>
-                    <select class="form-control" id="engine">
+                    <select class="form-control" id="engine" name="engine">
                         <option>1</option>
                         <option>2</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="transmission">transmission select</label>
-                    <select class="form-control" id="transmission">
+                    <select class="form-control" id="transmission" name="transmission">
                         <option>1</option>
                         <option>2</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="bodyCar">car body select</label>
-                    <select class="form-control" id="bodyCar">
+                    <select class="form-control" id="bodyCar" name="bodyCar">
                         <option>1</option>
                         <option>2</option>
                     </select>
@@ -55,7 +55,7 @@
                 <div class="form-group">
                     <label for="mileage">mileage</label>
                     <div class="input-group mb-3">
-                        <input type="number" class="form-control" id="mileage">
+                        <input type="number" class="form-control" id="mileage" name="mileage">
                         <div class="input-group-append">
                             <span class="input-group-text">meters</span>
                         </div>
@@ -64,7 +64,7 @@
                 <div class="form-group">
                     <label for="price">price</label>
                     <div class="input-group mb-3">
-                        <input type="number" class="form-control" id="price">
+                        <input type="number" class="form-control" id="price" name="price">
                         <div class="input-group-append">
                             <span class="input-group-text">RUB</span>
                         </div>
@@ -73,14 +73,20 @@
                 <div class="form-group">
                     <label for="year">year</label>
                     <div class="input-group mb-3">
-                        <input type="number" class="form-control" id="year" step="1" min="1908" max="2019">
+                        <input type="number" class="form-control" id="year" name="year" step="1" min="1908" max="2019">
                     </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" >accept</button>
                 </div>
 
             </div>
             <div class="col-sm-4">
-                <div class="form-group" id="upload-pic">
-                    <input type="file" id="myFile" name="myFile"/>
+                <div class="form-group" id="load-form">
+                    <label for="files">load picture</label>
+                    <!--<input type="file" class="form-control-file" id="load-pic">-->
+                    <input type="file" class="form-control-file" id="files" name="files[]" multiple />
+                    <output id="list"></output>
                 </div>
             </div>
             <div class="col-sm-2">

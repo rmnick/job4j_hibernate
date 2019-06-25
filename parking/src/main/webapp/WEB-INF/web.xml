@@ -12,6 +12,7 @@
         <filter-name>SessionFilter</filter-name>
         <url-pattern>/auth</url-pattern>
     </filter-mapping>
+
     <servlet>
         <servlet-name>EnterServlet</servlet-name>
         <servlet-class>ru.job4j.controller.EnterServlet</servlet-class>
@@ -20,6 +21,7 @@
         <servlet-name>EnterServlet</servlet-name>
         <url-pattern>/enter</url-pattern>
     </servlet-mapping>
+
     <servlet>
         <servlet-name>SessionEnd</servlet-name>
         <servlet-class>ru.job4j.controller.SessionEnd</servlet-class>
@@ -28,6 +30,7 @@
         <servlet-name>SessionEnd</servlet-name>
         <url-pattern>/out</url-pattern>
     </servlet-mapping>
+
     <servlet>
         <servlet-name>CheckSession</servlet-name>
         <servlet-class>ru.job4j.controller.SessionCheck</servlet-class>
@@ -36,6 +39,7 @@
         <servlet-name>CheckSession</servlet-name>
         <url-pattern>/check</url-pattern>
     </servlet-mapping>
+
     <servlet>
         <servlet-name>AdServlet</servlet-name>
         <servlet-class>ru.job4j.controller.AdServlet</servlet-class>
@@ -44,6 +48,7 @@
         <servlet-name>AdServlet</servlet-name>
         <url-pattern>/ad</url-pattern>
     </servlet-mapping>
+
     <servlet>
         <servlet-name>CreateServlet</servlet-name>
         <servlet-class>ru.job4j.controller.CreateServlet</servlet-class>
@@ -52,4 +57,12 @@
         <servlet-name>CreateServlet</servlet-name>
         <url-pattern>/create</url-pattern>
     </servlet-mapping>
+
+    <context-param>
+        <description>Location to store uploaded file</description>
+        <param-name>file-upload</param-name>
+        <param-value>
+            /home/nick/pictures
+        </param-value>
+    </context-param>
 </web-app>
