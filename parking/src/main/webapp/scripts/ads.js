@@ -1,14 +1,3 @@
-// Add the name of the file appear on select
-// $(".custom-file-input").on("change", function() {
-//     console.log("in script");
-//     var fileName = $(this).val().split("\\").pop();
-//     $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-// });
-
-
-$(function() {
-
-});
 
 function handleFileSelect(evt) {
     var files = evt.target.files; // FileList object
@@ -40,3 +29,38 @@ function handleFileSelect(evt) {
 }
 
 document.getElementById('files').addEventListener('change', handleFileSelect, false);
+
+//read all brands for option
+$(document).ready(function () {
+    $.ajax({
+        url: "../select",
+        method: "get",
+        complete: function (data) {
+            var result =  "<option name=\"brand\"></option>";
+            var brands = JSON.parse(data.responseText);
+            for (var i = 0; i < brands.length; i++) {
+                result += "<option value=\""+ brands[i].name + "\" name=\"brand\">" + brands[i].name + "</option>";
+            }
+            document.getElementById("brand").innerHTML = result;
+        }
+    });
+});
+
+//show model on brands changing
+function change() {
+    $.ajax({
+        url: "../select",
+        method: "post",
+        data: {"brand" : $("#brand").val()},
+        complete: function (data) {
+            console.log(data);
+            var result =  "<option name=\"model\"></option>";
+            var models = JSON.parse(data.responseText);
+            for (var i = 0; i < models.length; i++) {
+                result += "<option value=\""+ models[i] + "\" name=\"model\">" + models[i] + "</option>";
+            }
+            document.getElementById("model").innerHTML = result;
+        }
+    });
+}
+

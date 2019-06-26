@@ -58,6 +58,15 @@
         <url-pattern>/create</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>SelectServlet</servlet-name>
+        <servlet-class>ru.job4j.controller.SelectServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SelectServlet</servlet-name>
+        <url-pattern>/select</url-pattern>
+    </servlet-mapping>
+
     <context-param>
         <description>Location to store uploaded file</description>
         <param-name>file-upload</param-name>

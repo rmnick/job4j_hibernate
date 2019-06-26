@@ -47,10 +47,12 @@ public class AdServlet extends HttpServlet {
             for (FileItem item : items) {
                 if (item.isFormField()) {
                     attributes.put(item.getFieldName(), item.getString());
+
                 } else if (!item.isFormField()) {
                     String fileName = new File(item.getName()).getName();
                     String filePath = advtPath + File.separator + fileName;
                     File storeFile = new File(filePath);
+                    System.out.println(filePath);
                     // saves the file on disk
                     item.write(storeFile);
                 }
@@ -62,5 +64,7 @@ public class AdServlet extends HttpServlet {
             req.setAttribute("message",
                     "There was an error: " + e.getMessage());
         }
+
+        resp.sendRedirect("/index.html");
     }
 }

@@ -7,6 +7,10 @@ public class Brand {
     public Brand() {
     }
 
+    public Brand(final String name) {
+        this.name = name;
+    }
+
     public int getId() {
         return id;
     }

@@ -5,7 +5,9 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import ru.job4j.service.entities.Brand;
 import ru.job4j.service.entities.Car;
+import ru.job4j.service.entities.Model;
 import ru.job4j.service.entities.Person;
 
 import java.util.List;
@@ -70,6 +72,28 @@ public class HibernateStore {
     public List<Car> getAllCar() {
         return tx(session -> {
             return session.createCriteria(Car.class).list();
+        });
+    }
+
+    public List<Brand> getAllBrands() {
+        return tx(session -> {
+            return session.createCriteria(Brand.class).list();
+        });
+    }
+
+    public List<String> getAllModelsNamesByBrand(Brand brand) {
+        return tx(session -> {
+            List<String> result;
+            Query query = session.createQuery("select model.name from Model as model inner join model.brand as br with br.name=:name");
+            query.setParameter("name", brand.getName());
+            result = query.list();
+            return result;
+        });
+    }
+
+    public List<Model> getAllModels() {
+        return tx(session -> {
+            return session.createCriteria(Model.class).list();
         });
     }
 

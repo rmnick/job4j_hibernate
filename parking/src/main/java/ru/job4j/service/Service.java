@@ -1,9 +1,12 @@
 package ru.job4j.service;
 
 import ru.job4j.persistence.HibernateStore;
+import ru.job4j.service.entities.Brand;
+import ru.job4j.service.entities.Model;
 import ru.job4j.service.entities.Person;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -15,6 +18,7 @@ public class Service implements IService {
     public final static String EMAIL = "email";
     public final static String SUCCESS = "success";
     private final Map<String, Function<Person, Person>> validationMap = new HashMap<>();
+
 
     public static Service getInstance() {
         return INSTANCE;
@@ -43,6 +47,18 @@ public class Service implements IService {
             }
         }
         return result;
+    }
+
+    public List<Brand> getAllBrands() {
+        return store.getAllBrands();
+    }
+
+    public List<String> getAllModelsNamesByBrand(Brand brand) {
+        return store.getAllModelsNamesByBrand(brand);
+    }
+
+    public List<Model> getAllModels() {
+        return store.getAllModels();
     }
 
     public boolean validateEnter(Person person) {

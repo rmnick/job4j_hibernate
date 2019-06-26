@@ -1,5 +1,7 @@
 package ru.job4j.service.entities;
 
+import org.hibernate.annotations.Proxy;
+
 public class Model {
     private int id;
     private String name;
@@ -9,6 +11,10 @@ public class Model {
     private Brand brand;
 
     public Model() {
+    }
+
+    public Model(final String name) {
+        this.name = name;
     }
 
     public int getId() {
@@ -57,5 +63,10 @@ public class Model {
 
     public void setBrand(Brand brand) {
         this.brand = brand;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Model{name:%s}", this.getName());
     }
 }
