@@ -7,7 +7,7 @@ public class Car {
     private Model model;
     private Timestamp year;
     private int mileage;
-    private float price;
+    private int price;
 
     public Car() {
 
@@ -45,11 +45,11 @@ public class Car {
         this.mileage = mileage;
     }
 
-    public float getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 }

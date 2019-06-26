@@ -42,7 +42,7 @@ create table if not exists cars(
   year timestamp,
   mileage int,
   id_model int references models(id),
-  price real
+  price int
 );
 
 create table if not exists ads(
