@@ -4,22 +4,25 @@ import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import ru.job4j.service.Service;
 import ru.job4j.service.entities.Brand;
+import ru.job4j.service.entities.Model;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
 public class SelectServlet extends HttpServlet {
     private final Service service = Service.getInstance();
     public final static Logger LOG = Logger.getLogger(SelectServlet.class.getName());
+    public final static String BRAND = "brand";
+    public final static String MODEL = "model";
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             List<Brand> brands = service.getAllBrands();
@@ -36,7 +39,7 @@ public class SelectServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         try {
             ObjectMapper mapper = new ObjectMapper();
             PrintWriter writer = resp.getWriter();
@@ -45,21 +48,26 @@ public class SelectServlet extends HttpServlet {
             Enumeration<String> enumeration = req.getParameterNames();
             while (enumeration.hasMoreElements()) {
                 String param = enumeration.nextElement();
-                if (param.equals("brand")) {
-                    String brandStr = req.getParameter("brand");
+                if (param.equals(BRAND)) {
+                    String brandStr = req.getParameter(BRAND);
                     Brand brand = new Brand(brandStr);
                     List<String> models = service.getAllModelsNamesByBrand(brand);
                     String result = mapper.writeValueAsString(models);
                     writer.print(result);
-//                } else if(param.equals("model")) {
-//                    String modeldStr = req.getParameter("model");
-//                    Model model = new Model(modeldStr);
-//                    List<String> engines = service.getAllModelsNamesByBrand(brand);
-//                    String result = mapper.writeValueAsString(models);
-//                    writer.print(result);
+                } else if (param.equals(MODEL)) {
+                    String modeldStr = req.getParameter(MODEL);
+                    Model model = new Model(modeldStr);
+                    List<String> engines = service.getAllEnginesByModel(model);
+                    List<String> transmissions = service.getAllTransmissionsByModel(model);
+                    List<String> bodies = service.getAllBodyCarsByModel(model);
+                    List<List<String>> allParts = new ArrayList<>();
+                    allParts.add(engines);
+                    allParts.add(transmissions);
+                    allParts.add(bodies);
+                    String result = mapper.writeValueAsString(allParts);
+                    writer.print(result);
                 }
             }
-
             writer.flush();
         } catch (IOException e) {
             LOG.error(e.getMessage(), e);

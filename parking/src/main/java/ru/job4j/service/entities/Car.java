@@ -10,7 +10,13 @@ public class Car {
     private int price;
 
     public Car() {
+    }
 
+    public Car(final Model model, final Timestamp year, final int mileage, final int price) {
+        this.model = model;
+        this.year = year;
+        this.mileage = mileage;
+        this.price = price;
     }
 
     public int getId() {

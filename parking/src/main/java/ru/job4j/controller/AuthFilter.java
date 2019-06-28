@@ -22,7 +22,7 @@ public class AuthFilter implements Filter {
             } else {
                 HttpSession session = req.getSession(false);
                 if (session == null) {
-                    resp.sendRedirect(String.format("%s/", req.getContextPath()));
+                    resp.sendRedirect("/index.html");
                 } else {
                     chain.doFilter(req, resp);
                 }

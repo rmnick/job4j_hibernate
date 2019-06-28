@@ -1,7 +1,5 @@
 package ru.job4j.service.entities;
 
-import org.hibernate.annotations.Proxy;
-
 public class Model {
     private int id;
     private String name;

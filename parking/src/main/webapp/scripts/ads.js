@@ -1,4 +1,4 @@
-
+//show choosing picture
 function handleFileSelect(evt) {
     var files = evt.target.files; // FileList object
 
@@ -27,10 +27,9 @@ function handleFileSelect(evt) {
         reader.readAsDataURL(f);
     }
 }
-
 document.getElementById('files').addEventListener('change', handleFileSelect, false);
 
-//read all brands for option
+// read all brands for option
 $(document).ready(function () {
     $.ajax({
         url: "../select",
@@ -47,7 +46,7 @@ $(document).ready(function () {
 });
 
 //show model on brands changing
-function change() {
+function changeBrand() {
     $.ajax({
         url: "../select",
         method: "post",
@@ -64,3 +63,63 @@ function change() {
     });
 }
 
+//show engines, transmission, bodies on models changing
+function changeModel() {
+    $.ajax({
+        url: "../select",
+        method: "post",
+        data: {"model": $("#model").val()},
+        complete: function (data) {
+            console.log(data);
+            var resultEngine = "<option name=\"engine\"></option>";
+            var resultTransmission = "<option name=\"transmission\"></option>";
+            var resultBodies = "<option name=\"bodyCar\"></option>";
+
+            var parts = JSON.parse(data.responseText);
+            var engines = parts[0];
+            var transmission = parts[1];
+            var bodyCar = parts[2];
+
+            for (var i = 0; i < engines.length; i++) {
+                resultEngine += "<option value=\"" + engines[i] + "\" name=\"engine\">" + engines[i] + "</option>";
+            }
+            document.getElementById("engine").innerHTML = resultEngine;
+
+            for (var i = 0; i < transmission.length; i++) {
+                resultTransmission += "<option value=\"" + transmission[i] + "\" name=\"transmission\">" + transmission[i] + "</option>";
+            }
+            document.getElementById("transmission").innerHTML = resultTransmission;
+
+            for (var i = 0; i < bodyCar.length; i++) {
+                resultBodies += "<option value=\"" + bodyCar[i] + "\" name=\"bodyCar\">" + bodyCar[i] + "</option>";
+            }
+            document.getElementById("bodyCar").innerHTML = resultBodies;
+        }
+    });
+}
+
+//check all fields for empty spaces
+function validate() {
+    var result = true;
+    var fields = [$('#brand'), $('#model'), $('#engine'), $('#transmission'), $('#bodyCar'), $('#price'), $('#mileage'), $('#month')];
+    console.log("in validate");
+    for(var i = 0; i < fields.length; i++) {
+      if (fields[i].val() == null || fields[i].val() == "") {
+          alert("please fill the " + fields[i].attr('name') + " field");
+          result = false;
+          break;
+      }
+    }
+    return result;
+}
+
+function out() {
+    console.log("in out");
+    $.ajax({
+        method : "get",
+        url : "../out",
+        success : function (data) {
+            window.location.href = "/index.html";
+        }
+    });
+}

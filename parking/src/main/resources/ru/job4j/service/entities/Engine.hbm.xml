@@ -5,6 +5,5 @@
             <generator class="identity"/>
         </id>
         <property name="name" column="name"/>
-        <property name="volume" column="volume"/>
     </class>
 </hibernate-mapping>

@@ -4,9 +4,12 @@ package ru.job4j.service.entities;
 public class Engine {
     private int id;
     private String name;
-    private float volume;
 
     public Engine() {
+    }
+
+    public Engine(final String name) {
+        this.name = name;
     }
 
     public int getId() {
@@ -25,11 +28,8 @@ public class Engine {
         this.name = name;
     }
 
-    public float getVolume() {
-        return volume;
-    }
-
-    public void setVolume(float volume) {
-        this.volume = volume;
+    @Override
+    public String toString() {
+        return String.format("Engine{name:%s}", this.getName());
     }
 }

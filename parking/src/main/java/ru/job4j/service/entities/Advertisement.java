@@ -11,7 +11,15 @@ public class Advertisement {
     private boolean sold;
 
     public Advertisement() {
+    }
 
+
+    public Advertisement(Person person, Timestamp createDate, Car car, String picturePath, boolean sold) {
+        this.person = person;
+        this.createDate = createDate;
+        this.car = car;
+        this.picturePath = picturePath;
+        this.sold = sold;
     }
 
     public int getId() {

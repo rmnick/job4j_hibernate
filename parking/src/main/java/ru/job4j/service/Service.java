@@ -1,9 +1,7 @@
 package ru.job4j.service;
 
 import ru.job4j.persistence.HibernateStore;
-import ru.job4j.service.entities.Brand;
-import ru.job4j.service.entities.Model;
-import ru.job4j.service.entities.Person;
+import ru.job4j.service.entities.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -61,6 +59,22 @@ public class Service implements IService {
         return store.getAllModels();
     }
 
+    public List<String> getAllEnginesByModel(Model model) {
+        return store.getAllEnginesByModel(model);
+    }
+
+    public List<String> getAllTransmissionsByModel(Model model) {
+        return store.getAllTransmissionsByModel(model);
+    }
+
+    public List<String> getAllBodyCarsByModel(Model model) {
+        return store.getAllBodyCarsByModel(model);
+    }
+
+    public Model getModelByParam(Model model, Engine engine, Transmission transmission, BodyCar bodyCar) {
+        return store.getModelByParam(model, engine, transmission, bodyCar);
+    }
+
     public boolean validateEnter(Person person) {
         boolean result = false;
         Person personFromDb = store.getPersonByLogin(person);
@@ -68,6 +82,14 @@ public class Service implements IService {
             result = true;
         }
         return result;
+    }
+
+    public Person getPersonByLogin(Person person) {
+        return store.getPersonByLogin(person);
+    }
+
+    public Advertisement addAdvt(Car car, Advertisement advt) {
+        return store.addAdvt(car, advt);
     }
 
     private Function<Person, Person> checkLogin() {

@@ -24,6 +24,10 @@ public class Person {
         this(0, name, email, login, phone, password, null);
     }
 
+    public Person(final String login) {
+        this.login = login;
+    }
+
     public Person(final int id,
                   final String name,
                   final String email,

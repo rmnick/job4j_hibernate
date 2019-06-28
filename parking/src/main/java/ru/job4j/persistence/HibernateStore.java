@@ -5,10 +5,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import ru.job4j.service.entities.Brand;
-import ru.job4j.service.entities.Car;
-import ru.job4j.service.entities.Model;
-import ru.job4j.service.entities.Person;
+import ru.job4j.service.entities.*;
 
 import java.util.List;
 import java.util.function.Function;
@@ -84,7 +81,7 @@ public class HibernateStore {
     public List<String> getAllModelsNamesByBrand(Brand brand) {
         return tx(session -> {
             List<String> result;
-            Query query = session.createQuery("select model.name from Model as model inner join model.brand as br with br.name=:name");
+            Query query = session.createQuery("select model.name from Model as model inner join model.brand as br with br.name=:name group by model.name");
             query.setParameter("name", brand.getName());
             result = query.list();
             return result;
@@ -94,6 +91,57 @@ public class HibernateStore {
     public List<Model> getAllModels() {
         return tx(session -> {
             return session.createCriteria(Model.class).list();
+        });
+    }
+
+    public List<String> getAllEnginesByModel(Model model) {
+        return tx(session -> {
+            List<String> result;
+            Query query = session.createQuery("select engine.name from Model as model inner join model.engine as engine with model.name=:name group by engine.name");
+            query.setParameter("name", model.getName());
+            result = query.list();
+            return result;
+        });
+    }
+
+    public List<String> getAllTransmissionsByModel(Model model) {
+        return tx(session -> {
+            List<String> result;
+            Query query = session.createQuery("select transmission.name from Model as model inner join model.transmission as transmission with model.name=:name group by transmission.name");
+            query.setParameter("name", model.getName());
+            result = query.list();
+            return result;
+        });
+    }
+
+    public List<String> getAllBodyCarsByModel(Model model) {
+        return tx(session -> {
+            List<String> result;
+            Query query = session.createQuery("select body.name from Model as model inner join model.bodyCar as body with model.name=:name group by body.name");
+            query.setParameter("name", model.getName());
+            result = query.list();
+            return result;
+        });
+    }
+
+    public Model getModelByParam(Model model, Engine  engine, Transmission transmission, BodyCar bodyCar) {
+        return tx(session -> {
+            Model result;
+            Query query = session.createQuery("from Model as model where model.name=:name and model.engine.name=:eName and model.transmission.name=:tName and model.bodyCar.name=:bName");
+            query.setParameter("name", model.getName());
+            query.setParameter("eName", engine.getName());
+            query.setParameter("tName", transmission.getName());
+            query.setParameter("bName", bodyCar.getName());
+            result = (Model) query.uniqueResult();
+            return result;
+        });
+    }
+
+    public Advertisement addAdvt(Car car, Advertisement advt) {
+        return tx(session -> {
+            session.save(car);
+            session.save(advt);
+            return advt;
         });
     }
 

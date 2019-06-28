@@ -1,7 +1,6 @@
 create table if not exists engines(
 	id serial primary key,
-	name varchar(50),
-	volume real
+	name varchar(50)
 );
 
 create table if not exists transmissions(
@@ -54,12 +53,12 @@ create table if not exists ads(
   id_person int references persons(id)
 );
 
-insert into engines (name, volume) values ('1.6i', 1.6),
-('2.0i', 2),
-('1.4i', 1.4),
-('1.6td', 1.6),
-('2.5tdi', 2.5),
-('3.0i', 3);
+insert into engines (name) values ('1.6i'),
+('2.0i'),
+('1.4i'),
+('1.6td'),
+('2.5tdi'),
+('3.0i');
 
 insert into transmissions (name) values ('front wheel-drive'), ('rear wheel-drive'), ('all wheel-drive');
 
