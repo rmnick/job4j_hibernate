@@ -59,6 +59,10 @@ public class Service implements IService {
         return store.getAllModels();
     }
 
+    public List<Advertisement> getAllAds() {
+        return store.getAllAds();
+    }
+
     public List<String> getAllEnginesByModel(Model model) {
         return store.getAllEnginesByModel(model);
     }

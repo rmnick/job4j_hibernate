@@ -10,6 +10,7 @@ import java.io.IOException;
 public class SessionEnd extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("session destroy");
         HttpSession session = req.getSession(false);
         if (session != null) {
             session.invalidate();

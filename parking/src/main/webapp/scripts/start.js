@@ -47,8 +47,6 @@ function clickout() {
         url : "./out",
         success : function (data) {
             $('#signout').hide();
-            //just for smooth transition
-            $('#in').html('<button type="button" class="btn btn-primary">sign in</button>');
             window.location.href = "/index.html";
         }
     });

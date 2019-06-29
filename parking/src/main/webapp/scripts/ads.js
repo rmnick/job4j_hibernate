@@ -1,3 +1,12 @@
+$(function () {
+    checkSession(function(login) {
+        if (login == "") {
+            out();
+        }
+    });
+})
+
+
 //show choosing picture
 function handleFileSelect(evt) {
     var files = evt.target.files; // FileList object
@@ -120,6 +129,17 @@ function out() {
         url : "../out",
         success : function (data) {
             window.location.href = "/index.html";
+        }
+    });
+}
+
+function checkSession(checkLogin) {
+    $.ajax({
+        method : "get",
+        url : "../check",
+        dataType : "text",
+        success : function (response) {
+            checkLogin(response);
         }
     });
 }

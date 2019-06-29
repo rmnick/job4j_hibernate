@@ -78,6 +78,12 @@ public class HibernateStore {
         });
     }
 
+    public List<Advertisement> getAllAds() {
+        return tx(session -> {
+            return session.createCriteria(Advertisement.class).list();
+        });
+    }
+
     public List<String> getAllModelsNamesByBrand(Brand brand) {
         return tx(session -> {
             List<String> result;
