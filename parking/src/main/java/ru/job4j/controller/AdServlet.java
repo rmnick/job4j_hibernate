@@ -28,12 +28,11 @@ public class AdServlet extends HttpServlet {
     public final static String MODEL = "model";
     public final static String TRANSMISSION = "transmission";
     public final static String BODY = "bodyCar";
+    public final static String DESCRIPTION = "description";
     public final static String PRICE = "price";
     public final static String YEAR = "month";
     public final static String MILEAGE = "mileage";
     public final static String LOGIN = "login";
-
-
 
     @Override
     public void init() throws ServletException {
@@ -43,7 +42,7 @@ public class AdServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         try {
-            String filePath = "";
+            String filePath = this.getClass().getClassLoader().getResource("car.png").toString();
             // creates the directory if it does not exist
             //for win & linux
             String uploadDirUserName = String.format("%s%s%s", req.getServletContext().getInitParameter("file-upload"),
@@ -61,12 +60,16 @@ public class AdServlet extends HttpServlet {
                     attributes.put(item.getFieldName(), item.getString());
 
                 } else if (!item.isFormField()) {
-                    String fileName = new File(item.getName()).getName();
-                    filePath = uploadDirUserName + File.separator + fileName;
-                    File storeFile = new File(filePath);
-                    System.out.println(filePath);
-                    // saves the file on disk
-                    item.write(storeFile);
+                    System.out.println(item.getName());
+                    System.out.println(item.getSize());
+                    if (item.getSize() > 0) {
+                        String fileName = new File(item.getName()).getName();
+                        filePath = uploadDirUserName + File.separator + fileName;
+                        File storeFile = new File(filePath);
+                        System.out.println(filePath);
+                        // saves the file on disk
+                        item.write(storeFile);
+                    }
                 }
             }
 
@@ -85,7 +88,7 @@ public class AdServlet extends HttpServlet {
             //create advt
             Person person = new Person(req.getSession(false).getAttribute(LOGIN).toString());
             person = service.getPersonByLogin(person);
-            Advertisement advt = new Advertisement(person, new Timestamp(System.currentTimeMillis()), car, filePath, false);
+            Advertisement advt = new Advertisement(person, new Timestamp(System.currentTimeMillis()), attributes.get(DESCRIPTION), car, filePath, false);
 
             //add avt and car in one transaction to DB
             service.addAdvt(car, advt);

@@ -20,7 +20,7 @@ public class ShowAdvt extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             List<Advertisement> ads = service.getAllAds();
-            String path = ads.get(0).getPicturePath();
+            String path = ads.get(1).getPicturePath();
 
             ServletContext cntx = req.getServletContext();
             // Get the absolute path of the image
@@ -44,7 +44,8 @@ public class ShowAdvt extends HttpServlet {
             while ((count = in.read(buf)) >= 0) {
                 out.write(buf, 0, count);
             }
-            resp.getWriter().write(String.format("{car:%s}", ads.get(0).getCar().toString()));
+            out.write(String.format("{car:%s}", "Kia").getBytes());
+            out.flush();
             out.close();
             in.close();
         } catch (IOException e) {

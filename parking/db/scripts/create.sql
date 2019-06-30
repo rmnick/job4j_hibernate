@@ -48,6 +48,7 @@ create table if not exists ads(
   id serial primary key,
   create_date timestamp,
   path_picture varchar(100),
+  description varchar (300),
   sold boolean,
   id_car int references cars(id),
   id_person int references persons(id)

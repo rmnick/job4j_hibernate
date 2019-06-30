@@ -13,7 +13,7 @@
         <div class="col-sm-10">
             <form method="post" action="/ad" enctype="multipart/form-data" onsubmit="return validate()">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
                         <div id="optionTitle">
                             <h4>
                                 add advt
@@ -79,12 +79,16 @@
                         </div>
 
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-5">
                         <div class="form-group" id="load-form">
-                            <label for="files">load picture</label>
+                            <label for="file">load picture</label>
                             <!--<input type="file" class="form-control-file" id="load-pic">-->
-                            <input type="file" class="form-control-file" id="files" name="files[]" multiple />
-                            <output id="list"></output>
+                            <input type="file" class="form-control-file" id="file" name="files[]" multiple />
+                            <output id="output"></output>
+                        </div>
+                        <div class="form-group" id="desc">
+                            <label for="description">description</label>
+                            <textarea class="form-control" id="description" name="description" rows="6" maxlength="300" placeholder="write your description"></textarea>
                         </div>
                     </div>
                 </div>

@@ -6,6 +6,7 @@ public class Advertisement {
     private int id;
     private Person person;
     private Timestamp createDate;
+    private String description;
     private Car car;
     private String picturePath;
     private boolean sold;
@@ -14,9 +15,10 @@ public class Advertisement {
     }
 
 
-    public Advertisement(Person person, Timestamp createDate, Car car, String picturePath, boolean sold) {
+    public Advertisement(Person person, Timestamp createDate, String description, Car car, String picturePath, boolean sold) {
         this.person = person;
         this.createDate = createDate;
+        this.description = description;
         this.car = car;
         this.picturePath = picturePath;
         this.sold = sold;
@@ -68,5 +70,13 @@ public class Advertisement {
 
     public void setSold(boolean sold) {
         this.sold = sold;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

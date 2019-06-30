@@ -6,6 +6,7 @@
         </id>
         <property name="createDate" column="create_date"/>
         <property name="picturePath" column="path_picture"/>
+        <property name="description" column="description"/>
         <property name="sold" column="sold"/>
         <many-to-one name="person" column="id_person"
                      class="ru.job4j.service.entities.Person"/>
