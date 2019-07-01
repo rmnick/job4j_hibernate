@@ -42,11 +42,12 @@ public class AdServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         try {
-            String filePath = this.getClass().getClassLoader().getResource("car.png").toString();
+            String filePath = "default/car.png";
             // creates the directory if it does not exist
             //for win & linux
-            String uploadDirUserName = String.format("%s%s%s", req.getServletContext().getInitParameter("file-upload"),
-                    File.separator,
+//            String uploadDirUserName = String.format("%s%s%s", req.getServletContext().getInitParameter("file-upload"),
+            String uploadDirUserName = String.format("%s%s", getServletContext().getRealPath("/img/"),
+//                    File.separator,
                     req.getSession(false).getAttribute("login").toString());
             File uploadDir = new File(uploadDirUserName);
             if (!uploadDir.exists()) {

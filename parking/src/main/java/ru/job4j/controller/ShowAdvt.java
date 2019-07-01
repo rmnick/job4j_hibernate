@@ -1,5 +1,6 @@
 package ru.job4j.controller;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import ru.job4j.service.Service;
@@ -11,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.util.Base64;
 import java.util.List;
 
 public class ShowAdvt extends HttpServlet {
@@ -20,29 +20,32 @@ public class ShowAdvt extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ObjectMapper mapper = new ObjectMapper();
+        String url = req.getRequestURL().toString();
+        String uri = req.getRequestURI();
+        String path = req.getContextPath();
+        String serv = req.getServerName();
+        String scheme = req.getScheme() + "://";
+        String serverPort = (req.getServerPort() == 80) ? "" : ":" + req.getServerPort();
+
+        System.out.println("url " + url);
+        System.out.println("uri " + uri);
+        System.out.println("path " + path);
+        System.out.println("serv " + serv);
+        System.out.println("scheme " + scheme);
+        System.out.println("port " + serverPort);
+        System.out.println(scheme + serv + serverPort + path);
+        System.out.println("real path " + getServletContext().getRealPath("/img/"));
+
+//        ObjectMapper mapper = new ObjectMapper();
         List<Advertisement> ads = service.getAllAds();
         Advertisement ad = ads.get(0);
-//        for (Advertisement ad : ads) {
-            String base64Image = "";
-            File file = new File(ad.getPicturePath());
-            try (FileInputStream imageInFile = new FileInputStream(file)) {
-                // Reading a Image file from file system
-                byte imageData[] = new byte[(int) file.length()];
-                imageInFile.read(imageData);
-                base64Image = Base64.getEncoder().encodeToString(imageData);
-                System.out.println(base64Image);
-                PrintWriter writer = resp.getWriter();
-                writer.println(base64Image);
-                writer.flush();
-
-            } catch (FileNotFoundException e) {
-                System.out.println("Image not found" + e);
-            } catch (IOException ioe) {
-                System.out.println("Exception while reading the Image " + ioe);
-            }
-
-//            for (Advertisement ad : ads) {
+        System.out.println(ad.getPicturePath());
+        PrintWriter pw = resp.getWriter();
+        pw.print(ad.getPicturePath());
+        pw.flush();
+//        OutputStream out = resp.getOutputStream();
+//
+////            for (Advertisement ad : ads) {
 //                String path = ad.getPicturePath();
 //
 //                ServletContext cntx = req.getServletContext();
@@ -67,12 +70,11 @@ public class ShowAdvt extends HttpServlet {
 //                    out.write(buf, 0, count);
 //                }
 //                in.close();
-//            }
+////            }
 //
 ////            out.write(String.format("{car:%s}", "Kia").getBytes());
 //            out.flush();
 //            out.close();
 
-//        }
     }
 }
