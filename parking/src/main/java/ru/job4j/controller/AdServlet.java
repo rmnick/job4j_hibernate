@@ -24,15 +24,17 @@ public class AdServlet extends HttpServlet {
     private final static Logger LOG = Logger.getLogger(AdServlet.class.getName());
     private final Map<String, String> attributes = new HashMap<>();
     private final Service service = Service.getInstance();
-    public final static String ENGINE = "engine";
-    public final static String MODEL = "model";
-    public final static String TRANSMISSION = "transmission";
-    public final static String BODY = "bodyCar";
-    public final static String DESCRIPTION = "description";
-    public final static String PRICE = "price";
-    public final static String YEAR = "month";
-    public final static String MILEAGE = "mileage";
-    public final static String LOGIN = "login";
+    public static final String ENGINE = "engine";
+    public static final String MODEL = "model";
+    public static final String TRANSMISSION = "transmission";
+    public static final String BODY = "bodyCar";
+    public static final String DESCRIPTION = "description";
+    public static final String PRICE = "price";
+    public static final String YEAR = "month";
+    public static final String MILEAGE = "mileage";
+    public static final String LOGIN = "login";
+    public static final String PATH_DEFAULT_IMG = "default";
+    public static final String NAME_DEFAULT_IMG = "car.png";
 
     @Override
     public void init() throws ServletException {
@@ -42,12 +44,14 @@ public class AdServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         try {
-            String filePath = "default/car.png";
+            String filePath = getServletContext().getRealPath("/")
+                    + PATH_DEFAULT_IMG
+                    + File.separator
+                    + NAME_DEFAULT_IMG;
             // creates the directory if it does not exist
             //for win & linux
-//            String uploadDirUserName = String.format("%s%s%s", req.getServletContext().getInitParameter("file-upload"),
-            String uploadDirUserName = String.format("%s%s", getServletContext().getRealPath("/img/"),
-//                    File.separator,
+            String uploadDirUserName = String.format("%s%s%s", req.getServletContext().getInitParameter("file-upload"),
+                    File.separator,
                     req.getSession(false).getAttribute("login").toString());
             File uploadDir = new File(uploadDirUserName);
             if (!uploadDir.exists()) {
@@ -61,8 +65,6 @@ public class AdServlet extends HttpServlet {
                     attributes.put(item.getFieldName(), item.getString());
 
                 } else if (!item.isFormField()) {
-                    System.out.println(item.getName());
-                    System.out.println(item.getSize());
                     if (item.getSize() > 0) {
                         String fileName = new File(item.getName()).getName();
                         filePath = uploadDirUserName + File.separator + fileName;

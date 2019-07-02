@@ -1,11 +1,13 @@
 package ru.job4j.controller;
 
 import org.apache.log4j.Logger;
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.node.JsonNodeFactory;
-import org.codehaus.jackson.node.ObjectNode;
+
 import ru.job4j.service.Service;
 import ru.job4j.service.entities.Advertisement;
+import ru.job4j.service.entities.View;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -14,8 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.nio.file.Files;
-import java.util.Base64;
-import java.util.List;
+import java.util.*;
 
 public class ShowAdvt extends HttpServlet {
     private final Service service = Service.getInstance();
@@ -23,35 +24,29 @@ public class ShowAdvt extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String url = req.getRequestURL().toString();
-        String uri = req.getRequestURI();
-        String path = req.getContextPath();
-        String serv = req.getServerName();
-        String scheme = req.getScheme() + "://";
-        String serverPort = (req.getServerPort() == 80) ? "" : ":" + req.getServerPort();
-
-        System.out.println("url " + url);
-        System.out.println("uri " + uri);
-        System.out.println("path " + path);
-        System.out.println("serv " + serv);
-        System.out.println("scheme " + scheme);
-        System.out.println("port " + serverPort);
-        System.out.println(scheme + serv + serverPort + path);
-        System.out.println("real path " + getServletContext().getRealPath("/img/"));
-
         PrintWriter pw = resp.getWriter();
         ObjectMapper mapper = new ObjectMapper();
         List<Advertisement> ads = service.getAllAds();
-        Advertisement ad = ads.get(0);
-        System.out.println(ad.getPicturePath());
-        ObjectNode objectNode = mapper.createObjectNode();
+        byte[] imageData;
+        String base64Image;
+        View view;
 
-        File image = new File(ad.getPicturePath());
-        byte[] imageData = Files.readAllBytes(image.toPath());
-        String base64Image = Base64.getEncoder().encodeToString(imageData);
-        objectNode.put("image64", base64Image);
-        pw.append(mapper.writeValueAsString(objectNode));
+        List<View> imgs = new ArrayList<>();
+        for (int i = 0; i < ads.size(); i++) {
+            File image = new File(ads.get(i).getPicturePath());
+            imageData = Files.readAllBytes(image.toPath());
+            base64Image = Base64.getEncoder().encodeToString(imageData);
+            view = new View();
+            view.setImg(base64Image);
+            view.setDesc(ads.get(i).getDescription());
+            view.setSold(ads.get(i).isSold());
+            imgs.add(view);
+        }
+        mapper.writeValue(pw, imgs);
         pw.flush();
+
+//        pw.append(mapper.writeValueAsString(imgs));
+//        pw.flush();
 
 //        OutputStream out = resp.getOutputStream();
 //

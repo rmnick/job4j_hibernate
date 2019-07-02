@@ -86,8 +86,8 @@
         <description>Location to store uploaded file</description>
         <param-name>file-upload</param-name>
         <param-value>
-            /home/nick/pictures
-            <!--C:\pictures-->
+<!--            /home/nick/pictures-->
+            C:\pictures
         </param-value>
     </context-param>
 </web-app>
