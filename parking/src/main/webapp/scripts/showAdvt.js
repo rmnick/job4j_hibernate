@@ -4,10 +4,14 @@ $(document).ready(function () {
         url: "./showAds",
         method: "get",
         success: function (data) {
+            var json = $.parseJSON(data);
             console.log(data);
-                var row = "<tr></tr><td><img src='http://localhost:8080/" + data + "' class='img-fluid' alt='Responsive image'></td><td>desc</td><td>false</td></tr>";
+            for (var i in json) {
+                var row = "<tr></tr><td><img src=\"data:image/jpeg;base64," + json[i] + "\" class=\"img-fluid\" alt=\"Responsive image\"></td><td>desc</td><td>false</td></tr>";
+                console.log(json[i]);
                 console.log(row);
                 table.append(row);
+            }
         }
     });
 });

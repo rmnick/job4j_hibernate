@@ -1,8 +1,9 @@
 package ru.job4j.controller;
 
-import org.apache.commons.codec.binary.Base64;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.node.JsonNodeFactory;
+import org.codehaus.jackson.node.ObjectNode;
 import ru.job4j.service.Service;
 import ru.job4j.service.entities.Advertisement;
 
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.nio.file.Files;
+import java.util.Base64;
 import java.util.List;
 
 public class ShowAdvt extends HttpServlet {
@@ -36,13 +39,20 @@ public class ShowAdvt extends HttpServlet {
         System.out.println(scheme + serv + serverPort + path);
         System.out.println("real path " + getServletContext().getRealPath("/img/"));
 
-//        ObjectMapper mapper = new ObjectMapper();
+        PrintWriter pw = resp.getWriter();
+        ObjectMapper mapper = new ObjectMapper();
         List<Advertisement> ads = service.getAllAds();
         Advertisement ad = ads.get(0);
         System.out.println(ad.getPicturePath());
-        PrintWriter pw = resp.getWriter();
-        pw.print(ad.getPicturePath());
+        ObjectNode objectNode = mapper.createObjectNode();
+
+        File image = new File(ad.getPicturePath());
+        byte[] imageData = Files.readAllBytes(image.toPath());
+        String base64Image = Base64.getEncoder().encodeToString(imageData);
+        objectNode.put("image64", base64Image);
+        pw.append(mapper.writeValueAsString(objectNode));
         pw.flush();
+
 //        OutputStream out = resp.getOutputStream();
 //
 ////            for (Advertisement ad : ads) {
