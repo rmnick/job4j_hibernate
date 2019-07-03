@@ -22,42 +22,12 @@ public class ShowAdvt extends HttpServlet {
     public static final String NAME_DEFAULT_IMG = "car.png";
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         try {
-            PrintWriter pw = resp.getWriter();
-            ObjectMapper mapper = new ObjectMapper();
-            List<Advertisement> ads = service.getAllAds();
-            byte[] imageData;
-            String base64Image;
-            View view;
-
-            List<View> imgs = new ArrayList<>();
-            for (int i = 0; i < ads.size(); i++) {
-                String picPath = ads.get(i).getPicturePath();
-                //if there's not img then use default car.png
-                if (picPath == null) {
-                    picPath = getServletContext().getRealPath("/")
-                            + PATH_DEFAULT_IMG
-                            + File.separator
-                            + NAME_DEFAULT_IMG;
-                }
-                //convert img to Base64
-                File image = new File(picPath);
-                imageData = Files.readAllBytes(image.toPath());
-                base64Image = Base64.getEncoder().encodeToString(imageData);
-                //create object "view" for client
-                view = new View();
-                view.setImg(base64Image);
-                view.setDesc(ads.get(i).getDescription());
-                view.setSold(ads.get(i).isSold());
-                imgs.add(view);
-            }
-            mapper.writeValue(pw, imgs);
-            pw.flush();
-        } catch (Exception e) {
+            resp.getWriter().print(service.getNumberOfRows());
+        } catch (IOException e) {
             LOG.error(e.getMessage(), e);
         }
-
 /*push byte array from pic to client
         OutputStream out = resp.getOutputStream();
 
@@ -89,5 +59,45 @@ public class ShowAdvt extends HttpServlet {
             out.flush();
             out.close();
 */
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
+            PrintWriter pw = resp.getWriter();
+            ObjectMapper mapper = new ObjectMapper();
+//            List<Advertisement> ads = service.getAllAds();
+            List<Advertisement> ads = service.getAds(0, 0);
+
+            byte[] imageData;
+            String base64Image;
+            View view;
+
+            List<View> imgs = new ArrayList<>();
+            for (int i = 0; i < ads.size(); i++) {
+                String picPath = ads.get(i).getPicturePath();
+                //if there's not img then use default car.png
+                if (picPath == null) {
+                    picPath = getServletContext().getRealPath("/")
+                            + PATH_DEFAULT_IMG
+                            + File.separator
+                            + NAME_DEFAULT_IMG;
+                }
+                //convert img to Base64
+                File image = new File(picPath);
+                imageData = Files.readAllBytes(image.toPath());
+                base64Image = Base64.getEncoder().encodeToString(imageData);
+                //create object "view" for client
+                view = new View();
+                view.setImg(base64Image);
+                view.setDesc(ads.get(i).getDescription());
+                view.setSold(ads.get(i).isSold());
+                imgs.add(view);
+            }
+            mapper.writeValue(pw, imgs);
+            pw.flush();
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
     }
 }

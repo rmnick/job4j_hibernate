@@ -102,6 +102,14 @@ public class Service implements IService {
         };
     }
 
+    public List<Advertisement> getAds(int start, int end) {
+        return store.getAds(start, end);
+    }
+
+    public Long getNumberOfRows() {
+        return store.getNumberOfRows();
+    }
+
     private Function<Person, Person> checkPhone() {
         return person -> {
             return store.getPersonByPhone(person);

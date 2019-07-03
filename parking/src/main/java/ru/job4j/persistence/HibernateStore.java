@@ -151,6 +151,26 @@ public class HibernateStore {
         });
     }
 
+    public List<Advertisement> getAds(int start, int end) {
+        return tx(session -> {
+            List<Advertisement> result;
+            Query query = session.createQuery("from Advertisement as ads order by ads.id asc");
+            query.setFirstResult(0);
+            query.setMaxResults(5);
+            result = query.list();
+            return result;
+        });
+    }
+
+    public Long getNumberOfRows() {
+        return tx(session -> {
+            Long result;
+            Query query = session.createQuery("select count(*) from Advertisement");
+            result = (Long)query.uniqueResult();
+            return result;
+        });
+    }
+
     public Person getPersonByLogin(Person person) {
         return tx(session -> {
            Person result;

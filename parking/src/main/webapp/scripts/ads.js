@@ -14,6 +14,8 @@ function handleFileSelect(evt) {
     // Only process image files.
     if (!f.type.match('image.*')) {
         alert("Image only please....");
+    } else if (f.size > (1000 * 1024)) {
+        alert("too big");
     }
     var reader = new FileReader();
     // Closure to capture the file information.

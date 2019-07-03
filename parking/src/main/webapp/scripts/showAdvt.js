@@ -37,11 +37,61 @@
 //     }
 // });
 
+$(window).scroll(function() {
+    if($(window).scrollTop() == $(document).height() - $(window).height()) {
+        alert("scroll");
+    }
+});
+
+//show number of rows
+$(function () {
+    var row;
+    $.ajax({
+        url : "./showAds",
+        method : "get",
+        success: function (data) {
+            row = data;
+            console.log(row);
+        }
+    });
+});
+
 //show all ads
 $(function () {
     var jsonRequest = {"show":"all"};
     showTable(jsonRequest);
 });
+
+//draw table with ads
+function showTable(jsonValue) {
+    var table = $("table tbody");
+    table.empty();
+    var sold;
+    getData(function (data) {
+        var json = $.parseJSON(data);
+        for (var i in json) {
+            if (json[i].sold == false) {
+                sold = "";
+            } else {
+                sold = "<input type=\"checkbox\" class=\"form-check-input\" checked=\"checked2\" disabled>";
+            }
+            var row = "<tr></tr><td><img src=\"data:image/jpeg;base64," + json[i].img + "\" class=\"img-fluid\" alt=\"Responsive image\"></td><td>" + json[i].desc + "</td><td>" + sold+ "</td></tr>";
+            table.append(row);
+        }
+    }, jsonValue);
+}
+
+//get data from servlet, send "show" option
+function getData(funct, jsonValue) {
+    $.ajax({
+        url : "./showAds",
+        data : jsonValue,
+        method : "post",
+        success: function (data) {
+            funct(data);
+        }
+    });
+}
 
 // read all brands for option
 $(document).ready(function () {
@@ -121,35 +171,4 @@ function search() {
     var bodyCar = $("#bodyCar").val();
 
     console.log(model);
-}
-
-//draw table with ads
-function showTable(jsonValue) {
-    var table = $("table tbody");
-    table.empty();
-    var sold;
-    getData(function (data) {
-        var json = $.parseJSON(data);
-        for (var i in json) {
-            if (json[i].sold == false) {
-                sold = "";
-            } else {
-                sold = "<input type=\"checkbox\" class=\"form-check-input\" checked=\"checked2\" disabled>";
-            }
-            var row = "<tr></tr><td><img src=\"data:image/jpeg;base64," + json[i].img + "\" class=\"img-fluid\" alt=\"Responsive image\"></td><td>" + json[i].desc + "</td><td>" + sold+ "</td></tr>";
-            table.append(row);
-        }
-    }, jsonValue);
-}
-
-//get data from servlet, send "show" option
-function getData(funct, jsonValue) {
-    $.ajax({
-        url : "./showAds",
-        data : jsonValue,
-        method : "get",
-        success: function (data) {
-            funct(data);
-        }
-    });
 }
