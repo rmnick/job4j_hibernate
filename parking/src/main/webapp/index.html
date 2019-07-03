@@ -52,41 +52,36 @@
             <form>
                 <div class="form-group">
                     <label for="brand">brand select</label>
-                    <select class="form-control" id="brand">
-                        <option>1</option>
-                        <option>2</option>
+                    <select class="form-control" id="brand" name="brand" onchange="changeBrand()">
+
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="model">model select</label>
-                    <select class="form-control" id="model">
-                        <option>1</option>
-                        <option>2</option>
+                    <select class="form-control" id="model" name="model" onchange="changeModel()">
+
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="engine">engine select</label>
                     <select class="form-control" id="engine">
-                        <option>1</option>
-                        <option>2</option>
+
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="transmission">transmission select</label>
                     <select class="form-control" id="transmission">
-                        <option>1</option>
-                        <option>2</option>
+
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="bodyCar">car body select</label>
                     <select class="form-control" id="bodyCar">
-                        <option>1</option>
-                        <option>2</option>
+
                     </select>
                 </div>
                 <div class="form-group">
-                    <button type="button" class="btn btn-primary">search</button>
+                    <button type="button" class="btn btn-primary" onclick="search()">search</button>
                 </div>
             </form>
         </div>
@@ -100,7 +95,7 @@
                             <option>sort by newest first</option>
                             <option>sort by oldest first</option>
                             <option>show for the last day</option>
-                            <option>show for the last week</option>
+                            <option>show only with image</option>
                         </select>
                     </div>
                 </div>

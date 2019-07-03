@@ -24,6 +24,7 @@ public class AdServlet extends HttpServlet {
     private final static Logger LOG = Logger.getLogger(AdServlet.class.getName());
     private final Map<String, String> attributes = new HashMap<>();
     private final Service service = Service.getInstance();
+    public static final String BRAND = "brand";
     public static final String ENGINE = "engine";
     public static final String MODEL = "model";
     public static final String TRANSMISSION = "transmission";
@@ -33,8 +34,6 @@ public class AdServlet extends HttpServlet {
     public static final String YEAR = "month";
     public static final String MILEAGE = "mileage";
     public static final String LOGIN = "login";
-    public static final String PATH_DEFAULT_IMG = "default";
-    public static final String NAME_DEFAULT_IMG = "car.png";
 
     @Override
     public void init() throws ServletException {
@@ -44,11 +43,8 @@ public class AdServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         try {
-            String filePath = getServletContext().getRealPath("/")
-                    + PATH_DEFAULT_IMG
-                    + File.separator
-                    + NAME_DEFAULT_IMG;
-            // creates the directory if it does not exist
+            String filePath = null;
+            // creating the directory for img storage if it does not exist
             //for win & linux
             String uploadDirUserName = String.format("%s%s%s", req.getServletContext().getInitParameter("file-upload"),
                     File.separator,
@@ -67,7 +63,11 @@ public class AdServlet extends HttpServlet {
                 } else if (!item.isFormField()) {
                     if (item.getSize() > 0) {
                         String fileName = new File(item.getName()).getName();
-                        filePath = uploadDirUserName + File.separator + fileName;
+                        String[] arr = fileName.split("\\.");
+                        String ext = arr[arr.length - 1];
+                        filePath = uploadDirUserName
+                                + File.separator
+                                + String.format("%s.%s", String.valueOf(System.currentTimeMillis()), ext);
                         File storeFile = new File(filePath);
                         System.out.println(filePath);
                         // saves the file on disk
@@ -91,7 +91,14 @@ public class AdServlet extends HttpServlet {
             //create advt
             Person person = new Person(req.getSession(false).getAttribute(LOGIN).toString());
             person = service.getPersonByLogin(person);
-            Advertisement advt = new Advertisement(person, new Timestamp(System.currentTimeMillis()), attributes.get(DESCRIPTION), car, filePath, false);
+            String desc = String.format("%s %s, %s, %s. %s %s",
+                    attributes.get(BRAND),
+                    attributes.get(MODEL),
+                    attributes.get(ENGINE),
+                    attributes.get(YEAR),
+                    System.lineSeparator(),
+                    attributes.get(DESCRIPTION));
+            Advertisement advt = new Advertisement(person, new Timestamp(System.currentTimeMillis()), desc, car, filePath, false);
 
             //add avt and car in one transaction to DB
             service.addAdvt(car, advt);
