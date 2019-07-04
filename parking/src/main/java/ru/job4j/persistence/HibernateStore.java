@@ -151,12 +151,12 @@ public class HibernateStore {
         });
     }
 
-    public List<Advertisement> getAds(int start, int end) {
+    public List<Advertisement> getAds(int start, int max) {
         return tx(session -> {
             List<Advertisement> result;
-            Query query = session.createQuery("from Advertisement as ads order by ads.id asc");
-            query.setFirstResult(0);
-            query.setMaxResults(5);
+            Query query = session.createQuery("from Advertisement as ads order by ads.createDate asc");
+            query.setFirstResult(start);
+            query.setMaxResults(max);
             result = query.list();
             return result;
         });

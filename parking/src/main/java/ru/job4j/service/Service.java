@@ -102,8 +102,8 @@ public class Service implements IService {
         };
     }
 
-    public List<Advertisement> getAds(int start, int end) {
-        return store.getAds(start, end);
+    public List<Advertisement> getAds(int start, int max) {
+        return store.getAds(start, max);
     }
 
     public Long getNumberOfRows() {

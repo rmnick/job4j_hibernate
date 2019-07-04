@@ -67,7 +67,10 @@ public class ShowAdvt extends HttpServlet {
             PrintWriter pw = resp.getWriter();
             ObjectMapper mapper = new ObjectMapper();
 //            List<Advertisement> ads = service.getAllAds();
-            List<Advertisement> ads = service.getAds(0, 0);
+            System.out.println("start param" + req.getParameter("start"));
+            System.out.println("max param " + req.getParameter("max"));
+            List<Advertisement> ads = service.getAds(Integer.valueOf(req.getParameter("start")), Integer.valueOf(req.getParameter("max")));
+            System.out.println(ads.size());
 
             byte[] imageData;
             String base64Image;

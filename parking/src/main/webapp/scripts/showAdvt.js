@@ -44,28 +44,44 @@ $(window).scroll(function() {
 });
 
 //show number of rows
-$(function () {
+function getRow(forAll) {
     var row;
     $.ajax({
         url : "./showAds",
         method : "get",
         success: function (data) {
-            row = data;
-            console.log(row);
+            forAll(data);
+        }
+
+    });
+}
+
+//show all ads
+$(function () {
+    var table = $("table tbody");
+    table.empty();
+    getRow(function (data) {
+        for (var i = 0; i < data; i++) {
+            var jsonRequest = {"show" : "all", "start" : i, "max": 1};
+            showTable(jsonRequest, table);
         }
     });
 });
 
-//show all ads
-$(function () {
-    var jsonRequest = {"show":"all"};
-    showTable(jsonRequest);
-});
+function desc() {
+
+}
+
+function acs() {
+
+}
+
+function brand() {
+
+}
 
 //draw table with ads
-function showTable(jsonValue) {
-    var table = $("table tbody");
-    table.empty();
+function showTable(jsonValue, table) {
     var sold;
     getData(function (data) {
         var json = $.parseJSON(data);
