@@ -21,6 +21,11 @@ public class SelectServlet extends HttpServlet {
     public final static String BRAND = "brand";
     public final static String MODEL = "model";
 
+    /**
+     * send to user all car brands from DB
+     * @param req
+     * @param resp
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         try {
@@ -38,6 +43,11 @@ public class SelectServlet extends HttpServlet {
         }
     }
 
+    /**
+     * get json from user and depending on the condition(brand or model) send the data of the model or parts
+     * @param req
+     * @param resp
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         try {
@@ -69,6 +79,7 @@ public class SelectServlet extends HttpServlet {
                 }
             }
             writer.flush();
+            writer.close();
         } catch (IOException e) {
             LOG.error(e.getMessage(), e);
         }

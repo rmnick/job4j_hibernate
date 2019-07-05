@@ -58,30 +58,34 @@
                 </div>
                 <div class="form-group">
                     <label for="model">model select</label>
-                    <select class="form-control" id="model" name="model" onchange="changeModel()">
+                    <select class="form-control" id="model" name="model">
 
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="engine">engine select</label>
-                    <select class="form-control" id="engine">
+                    <label for="select one">some select</label>
+                    <select class="form-control" id="select one">
 
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="transmission">transmission select</label>
-                    <select class="form-control" id="transmission">
+                    <label for="select two">some select</label>
+                    <select class="form-control" id="select two">
 
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="bodyCar">car body select</label>
-                    <select class="form-control" id="bodyCar">
+                    <label for="select three">some select</label>
+                    <select class="form-control" id="select three">
 
                     </select>
                 </div>
+                <div class="form-group" id="photoDiv">
+                    <input type="checkbox" class="form-check-input" id="photo">
+                    <label class="form-check-label" for="photo">show only with photo</label>
+                </div>
                 <div class="form-group">
-                    <button type="button" class="btn btn-primary" id="search" onclick="search()">search</button>
+                    <button type="button" class="btn btn-primary" id="search" onclick="searchByOptions()">search</button>
                 </div>
             </form>
         </div>
@@ -91,11 +95,10 @@
                 </div>
                 <div class="col-sm-4">
                     <div class="form-group">
-                        <select class="form-control" id="sort">
+                        <select class="form-control" id="sort" onchange="searchByOptions()">
                             <option>sort by newest first</option>
                             <option>sort by oldest first</option>
                             <option>show for the last day</option>
-                            <option>show only with image</option>
                         </select>
                     </div>
                 </div>

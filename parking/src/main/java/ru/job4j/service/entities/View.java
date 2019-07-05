@@ -1,9 +1,14 @@
 package ru.job4j.service.entities;
 
+/**
+ * object for easy demonstration to the user of the advert
+ */
 public class View {
+    private int id;
     private String desc;
     private String img;
     private boolean sold;
+
 
     public View() {
 
@@ -31,5 +36,13 @@ public class View {
 
     public void setSold(boolean sold) {
         this.sold = sold;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

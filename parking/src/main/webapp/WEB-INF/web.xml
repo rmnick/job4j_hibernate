@@ -81,13 +81,35 @@
         <url-pattern>/showAds</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+    <servlet-name>Update</servlet-name>
+    <servlet-class>ru.job4j.controller.UpdateServlet</servlet-class>
+</servlet>
+    <servlet-mapping>
+        <servlet-name>Update</servlet-name>
+        <url-pattern>/update</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>MyAds</servlet-name>
+        <servlet-class>ru.job4j.controller.MyAds</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MyAds</servlet-name>
+        <url-pattern>/myAds</url-pattern>
+    </servlet-mapping>
+
     <!--different uploading paths for linux and win-->
     <context-param>
         <description>Location to store uploaded file</description>
         <param-name>file-upload</param-name>
         <param-value>
-            /home/nick/pictures
-            <!--C:\pictures-->
+<!--            /home/nick/pictures-->
+            C:\pictures
         </param-value>
     </context-param>
+
+    <listener>
+        <listener-class>ru.job4j.controller.ListenerForCreatePathOnStartUp</listener-class>
+    </listener>
 </web-app>

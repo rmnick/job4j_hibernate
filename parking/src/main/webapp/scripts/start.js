@@ -34,8 +34,8 @@ function clickon(data) {
         + data + '\n' +
         '                        </button>\n' +
         '                        <div class="dropdown-menu">\n' +
-        '                            <button class="dropdown-item" onclick="clickout()">Profile</button>\n' +
-        '                            <button class="dropdown-item" onclick="clickout()">My ads</button>\n' +
+        '                            <button class="dropdown-item" onclick="goProfile()">Profile</button>\n' +
+        '                            <button class="dropdown-item" onclick="goMyAds()">My ads</button>\n' +
         '                            <button class="dropdown-item" onclick="clickout()">Sign out</button>\n' +
         '                        </div>\n' +
         '                    </div>')
@@ -87,6 +87,7 @@ function validPass(password) {
     return password != '';
 }
 
+//validate session by login
 function checkSession(checkLogin) {
     $.ajax({
        method : "get",
@@ -95,5 +96,22 @@ function checkSession(checkLogin) {
        success : function (response) {
            checkLogin(response);
        }
+    });
+}
+
+function goProfile() {
+    checkSession(function(login) {
+        if (login != "") {
+            window.location.href = "view/profile.html";
+        }
+    });
+}
+
+
+function goMyAds() {
+    checkSession(function(login) {
+        if (login != "") {
+            window.location.href = "view/myAds.html";
+        }
     });
 }

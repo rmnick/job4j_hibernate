@@ -5,7 +5,6 @@ import org.codehaus.jackson.map.ObjectMapper;
 import ru.job4j.service.Service;
 import ru.job4j.service.entities.Person;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,11 +14,12 @@ public class EnterServlet extends HttpServlet {
     public final static Logger LOG = Logger.getLogger(EnterServlet.class.getName());
     private final Service service = Service.getInstance();
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
-    }
-
+    /**
+     * get data from "index"(enter) page, checking person for existence in DB,
+     * create cookies for login and password, create new session with new attribute for further authentication
+     * @param req
+     * @param resp
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         try {

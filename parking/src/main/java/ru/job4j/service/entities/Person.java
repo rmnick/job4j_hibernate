@@ -1,8 +1,6 @@
 package ru.job4j.service.entities;
 
-import java.sql.Timestamp;
 import java.util.List;
-import java.util.Objects;
 
 public class Person {
     private int id;

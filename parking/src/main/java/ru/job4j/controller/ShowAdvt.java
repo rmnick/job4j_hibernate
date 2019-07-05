@@ -5,14 +5,11 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import ru.job4j.service.Service;
 import ru.job4j.service.entities.Advertisement;
-import ru.job4j.service.entities.View;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.nio.file.Files;
 import java.util.*;
 
 public class ShowAdvt extends HttpServlet {
@@ -21,6 +18,11 @@ public class ShowAdvt extends HttpServlet {
     public static final String PATH_DEFAULT_IMG = "default";
     public static final String NAME_DEFAULT_IMG = "car.png";
 
+    /**
+     * send to user number of ads rows for further processing of requests
+     * @param req
+     * @param resp
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         try {
@@ -28,77 +30,33 @@ public class ShowAdvt extends HttpServlet {
         } catch (IOException e) {
             LOG.error(e.getMessage(), e);
         }
-/*push byte array from pic to client
-        OutputStream out = resp.getOutputStream();
-
-                String path = ad.getPicturePath();
-
-                ServletContext cntx = req.getServletContext();
-                // Get the absolute path of the image
-                String filename = path;
-                // retrieve mimeType dynamically
-                String mime = cntx.getMimeType(filename);
-                if (mime == null) {
-                    resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                    return;
-                }
-                resp.setContentType(mime);
-                File file = new File(filename);
-                resp.setContentLength((int) file.length());
-
-                FileInputStream in = new FileInputStream(file);
-
-                // Copy the contents of the file to the output stream
-                byte[] buf = new byte[1024];
-                int count = 0;
-                while ((count = in.read(buf)) >= 0) {
-                    out.write(buf, 0, count);
-                }
-                in.close();
-
-            out.flush();
-            out.close();
-*/
     }
 
+    /**
+     * show all adverts according some options
+     * @param req
+     * @param resp
+     */
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         try {
             PrintWriter pw = resp.getWriter();
             ObjectMapper mapper = new ObjectMapper();
-//            List<Advertisement> ads = service.getAllAds();
-            System.out.println("start param" + req.getParameter("start"));
-            System.out.println("max param " + req.getParameter("max"));
-            List<Advertisement> ads = service.getAds(Integer.valueOf(req.getParameter("start")), Integer.valueOf(req.getParameter("max")));
-            System.out.println(ads.size());
+            List<Advertisement> ads;
+            Map<String, String> map = new HashMap<>();
 
-            byte[] imageData;
-            String base64Image;
-            View view;
-
-            List<View> imgs = new ArrayList<>();
-            for (int i = 0; i < ads.size(); i++) {
-                String picPath = ads.get(i).getPicturePath();
-                //if there's not img then use default car.png
-                if (picPath == null) {
-                    picPath = getServletContext().getRealPath("/")
-                            + PATH_DEFAULT_IMG
-                            + File.separator
-                            + NAME_DEFAULT_IMG;
-                }
-                //convert img to Base64
-                File image = new File(picPath);
-                imageData = Files.readAllBytes(image.toPath());
-                base64Image = Base64.getEncoder().encodeToString(imageData);
-                //create object "view" for client
-                view = new View();
-                view.setImg(base64Image);
-                view.setDesc(ads.get(i).getDescription());
-                view.setSold(ads.get(i).isSold());
-                imgs.add(view);
+            //init map with keys aka names and values for service
+            Enumeration<String> params = req.getParameterNames();
+            while (params.hasMoreElements()) {
+                String param = params.nextElement();
+                map.put(param, req.getParameter(param));
             }
-            mapper.writeValue(pw, imgs);
+
+            ads = service.getAds(map);
+            String realPath = getServletContext().getRealPath("/");
+            mapper.writeValue(pw, service.createViews(ads, realPath));
             pw.flush();
+            pw.close();
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }

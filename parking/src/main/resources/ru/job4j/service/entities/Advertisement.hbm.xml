@@ -10,7 +10,6 @@
         <property name="sold" column="sold"/>
         <many-to-one name="person" column="id_person"
                      class="ru.job4j.service.entities.Person"/>
-        <many-to-one name="car" column="id_car"
-                     class="ru.job4j.service.entities.Car"/>
+        <many-to-one name="car" column="id_car" class="ru.job4j.service.entities.Car" cascade="all" unique="true"/>
     </class>
 </hibernate-mapping>

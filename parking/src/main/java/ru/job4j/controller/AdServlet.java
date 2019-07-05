@@ -35,17 +35,18 @@ public class AdServlet extends HttpServlet {
     public static final String MILEAGE = "mileage";
     public static final String LOGIN = "login";
 
-    @Override
-    public void init() throws ServletException {
-        super.init();
-    }
 
+    /**
+     * load all data from user page and create new advert
+     * @param req
+     * @param resp
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         try {
             String filePath = null;
             // creating the directory for img storage if it does not exist
-            //for win & linux
+            //for win & linux, get path from web.xml
             String uploadDirUserName = String.format("%s%s%s", req.getServletContext().getInitParameter("file-upload"),
                     File.separator,
                     req.getSession(false).getAttribute("login").toString());
@@ -100,8 +101,8 @@ public class AdServlet extends HttpServlet {
                     attributes.get(DESCRIPTION));
             Advertisement advt = new Advertisement(person, new Timestamp(System.currentTimeMillis()), desc, car, filePath, false);
 
-            //add avt and car in one transaction to DB
-            service.addAdvt(car, advt);
+            //add advert to DB
+            service.addEntity(advt);
 
             resp.sendRedirect("/index.html");
         } catch (FileUploadException e) {

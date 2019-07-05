@@ -50,7 +50,7 @@ create table if not exists ads(
   path_picture varchar(100),
   description varchar (300),
   sold boolean,
-  id_car int references cars(id),
+  id_car int references cars(id) on delete cascade,
   id_person int references persons(id)
 );
 

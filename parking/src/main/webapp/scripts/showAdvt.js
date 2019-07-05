@@ -22,62 +22,88 @@
 //     });
 // });
 
-// $(function () {
+// function getRow(number) {
+//     $.ajax({
+//         url: "./showAds",
+//         method: "get",
+//         success: function (data) {
+//             console.log(data);
+//             number(data);
+//         }
+//
+//     });
+// }
+
+// $(function() {
+//     var firstBatch = 3;
 //     var table = $("table tbody");
 //     table.empty();
-//     for (var i = 0; i < 4; i++) {
-//         getImg(function (data) {
-//             if(data != null && data.size > 0) {
-//                 var table = $("table tbody");
-//                 var row = "<tr></tr><td><img src='./showAds' class='img-fluid' alt='Responsive image'></td><td>desc</td><td>false</td></tr>";
-//                 console.log(data);
-//                 table.append(row);
+//     getRow(function (data) {
+//         var number = data;
+//         if (number < firstBatch) {
+//             for (var i = 0; i < number; i++) {
+//                 var jsonRequest = {"show" : "all", "start" : i, "max": 1};
+//                 showTable(jsonRequest, table);
+//             }
+//         } else {
+//             var jsonRequest = {"show" : "all", "start" : 0, "max": firstBatch};
+//             showTable(jsonRequest, table);
+//             myScroll(number, firstBatch);
+//         }
+//     });
+//
+//     function myScroll(number, start) {
+//         $(window).scroll(function() {
+//             if($(window).scrollTop() == $(document).height() - $(window).height()) {
+//                 var jsonRequest = {"show" : "all", "start" : start, "max": 1};
+//                 showTable(jsonRequest, table);
+//                 start++;
+//                 console.log(number);
+//                 if(start == number) {
+//                     console.log("equals");
+//                     return false;
+//                 }
 //             }
 //         });
 //     }
 // });
 
-$(window).scroll(function() {
-    if($(window).scrollTop() == $(document).height() - $(window).height()) {
-        alert("scroll");
-    }
+
+// get all ads when opening the page
+$(function () {
+    var jsonRequestMap = new Map();
+    jsonRequestMap.set("additional", "desc");
+    main(jsonRequestMap);
 });
 
-//show number of rows
+//main function for showing ads
+function main(jsonRequestMap) {
+    var table = $("table tbody");
+    table.empty();
+    getRow(function (data) {
+        for (var i = 0; i < data; i++) {
+            var jsonRequestStr = "{";
+            jsonRequestMap.forEach(function (value, key) {
+               jsonRequestStr += ( "\"" + key + "\"" + ":" + "\"" + value + "\"" + ", ");
+            });
+            jsonRequestStr += "\"start\" : " + "\"" + i + "\"" + ", ";
+            jsonRequestStr +="\"max\" : \"1\"";
+            jsonRequestStr += "}";
+            var jsonRequest = JSON.parse(jsonRequestStr);
+            showTable(jsonRequest, table);
+        }
+    });
+}
+
+//get number of rows
 function getRow(forAll) {
-    var row;
     $.ajax({
         url : "./showAds",
         method : "get",
         success: function (data) {
             forAll(data);
         }
-
     });
-}
-
-//show all ads
-$(function () {
-    var table = $("table tbody");
-    table.empty();
-    getRow(function (data) {
-        for (var i = 0; i < data; i++) {
-            var jsonRequest = {"show" : "all", "start" : i, "max": 1};
-            showTable(jsonRequest, table);
-        }
-    });
-});
-
-function desc() {
-
-}
-
-function acs() {
-
-}
-
-function brand() {
-
 }
 
 //draw table with ads
@@ -91,7 +117,7 @@ function showTable(jsonValue, table) {
             } else {
                 sold = "<input type=\"checkbox\" class=\"form-check-input\" checked=\"checked2\" disabled>";
             }
-            var row = "<tr></tr><td><img src=\"data:image/jpeg;base64," + json[i].img + "\" class=\"img-fluid\" alt=\"Responsive image\"></td><td>" + json[i].desc + "</td><td>" + sold+ "</td></tr>";
+            var row = "<tr><td><img src=\"data:image/jpeg;base64," + json[i].img + "\" class=\"img-fluid\" alt=\"Responsive image\"></td><td>" + json[i].desc + "</td><td>" + sold+ "</td></tr>";
             table.append(row);
         }
     }, jsonValue);
@@ -103,6 +129,7 @@ function getData(funct, jsonValue) {
         url : "./showAds",
         data : jsonValue,
         method : "post",
+        async : false,
         success: function (data) {
             funct(data);
         }
@@ -132,7 +159,6 @@ function changeBrand() {
         method: "post",
         data: {"brand" : $("#brand").val()},
         complete: function (data) {
-            console.log(data);
             var result =  "<option name=\"model\"></option>";
             var models = JSON.parse(data.responseText);
             for (var i = 0; i < models.length; i++) {
@@ -143,48 +169,40 @@ function changeBrand() {
     });
 }
 
-//show engines, transmission, bodies on models changing
-function changeModel() {
-    $.ajax({
-        url: "./select",
-        method: "post",
-        data: {"model": $("#model").val()},
-        complete: function (data) {
-            console.log(data);
-            var resultEngine = "<option name=\"engine\"></option>";
-            var resultTransmission = "<option name=\"transmission\"></option>";
-            var resultBodies = "<option name=\"bodyCar\"></option>";
-
-            var parts = JSON.parse(data.responseText);
-            var engines = parts[0];
-            var transmission = parts[1];
-            var bodyCar = parts[2];
-
-            for (var i = 0; i < engines.length; i++) {
-                resultEngine += "<option value=\"" + engines[i] + "\" name=\"engine\">" + engines[i] + "</option>";
-            }
-            document.getElementById("engine").innerHTML = resultEngine;
-
-            for (var i = 0; i < transmission.length; i++) {
-                resultTransmission += "<option value=\"" + transmission[i] + "\" name=\"transmission\">" + transmission[i] + "</option>";
-            }
-            document.getElementById("transmission").innerHTML = resultTransmission;
-
-            for (var i = 0; i < bodyCar.length; i++) {
-                resultBodies += "<option value=\"" + bodyCar[i] + "\" name=\"bodyCar\">" + bodyCar[i] + "</option>";
-            }
-            document.getElementById("bodyCar").innerHTML = resultBodies;
-        }
-    });
-}
-
-//search by condition
-function search() {
+//reading all option and create request
+function searchByOptions() {
+    var jsonRequestMap = new Map();
     var brand = $("#brand").val();
     var model = $("#model").val();
-    var engine = $("#engine").val();
-    var transmission = $("#transmission").val();
-    var bodyCar = $("#bodyCar").val();
+    var additional = $("#sort").val();
 
-    console.log(model);
+    if (brand != null && brand != "") {
+        jsonRequestMap.set("brand", brand);
+    }
+    if (model != null && model != "") {
+        jsonRequestMap.set("model", model);
+
+    }
+
+    switch (additional) {
+        case("sort by newest first"):
+            additional = "desc";
+            break;
+        case("sort by oldest first"):
+            additional = "asc";
+            break;
+        case("show for the last day"):
+            additional = "desc";
+            jsonRequestMap.set("last", "");
+            break;
+        default:
+            break;
+    }
+    jsonRequestMap.set("additional", additional);
+
+    if ($('.form-check-input').is(':checked')) {
+        jsonRequestMap.set("photo", "");
+    }
+
+    main(jsonRequestMap);
 }

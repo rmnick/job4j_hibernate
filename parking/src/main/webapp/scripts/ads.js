@@ -14,8 +14,10 @@ function handleFileSelect(evt) {
     // Only process image files.
     if (!f.type.match('image.*')) {
         alert("Image only please....");
+        return false;
     } else if (f.size > (1000 * 1024)) {
         alert("too big");
+        return false;
     }
     var reader = new FileReader();
     // Closure to capture the file information.
@@ -116,8 +118,8 @@ function validate() {
     return result;
 }
 
+//destroy session, change location
 function out() {
-    console.log("in out");
     $.ajax({
         method : "get",
         url : "../out",
@@ -127,6 +129,7 @@ function out() {
     });
 }
 
+//check session attribute "login"
 function checkSession(checkLogin) {
     $.ajax({
         method : "get",
