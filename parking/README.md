@@ -1,3 +1,4 @@
+# parking
 
 Реализовать площадку по продаже машин.
 Это должно быть web приложение со следующими страницами.
@@ -11,22 +12,23 @@
 8. должны быть реализованы пользовательские фильтры для поиска(селекторы)
 9. добавить интеграционные тесты
 
-- основная страница
+
+## основная страница
 
 ![alt text](https://github.com/rmnick/sources/blob/master/imgs/main.jpg)
 
-- регистрация
+## регистрация
 
 ![alt text](https://github.com/rmnick/sources/blob/master/imgs/reg.JPG)
 
-- авторизация
+## авторизация
 
 ![alt text](https://github.com/rmnick/sources/blob/master/imgs/mainAuth.jpg)
 
-- работа с профилем
+## работа с профилем
 
 ![alt text](https://github.com/rmnick/sources/blob/master/imgs/mainProfile.jpg)
 
-- добавить объявление
+## добавить объявление
 
 ![alt text](https://github.com/rmnick/sources/blob/master/imgs/addAdv.JPG)
