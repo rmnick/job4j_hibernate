@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class SessionCheck extends HttpServlet {
-    private final static Logger LOG = Logger.getLogger(SessionCheck.class.getName());
+    private static final Logger LOG = Logger.getLogger(SessionCheck.class.getName());
 
     /**
      * checking session on certain attribute "login", if successful sending a "login"

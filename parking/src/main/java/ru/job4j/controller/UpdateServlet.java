@@ -2,6 +2,8 @@ package ru.job4j.controller;
 
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
+import ru.job4j.service.IPersonService;
+import ru.job4j.service.PersonService;
 import ru.job4j.service.Service;
 import ru.job4j.service.entities.Person;
 
@@ -14,8 +16,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class UpdateServlet extends HttpServlet {
-    private final static Logger LOG = Logger.getLogger(CreateServlet.class.getName());
-    private final Service service = Service.getInstance();
+    private static final Logger LOG = Logger.getLogger(CreateServlet.class.getName());
+    private final IPersonService service = PersonService.getInstance();
 
     /**
      * update person data

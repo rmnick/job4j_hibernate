@@ -5,10 +5,9 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.log4j.Logger;
-import ru.job4j.service.Service;
+import ru.job4j.service.*;
 import ru.job4j.service.entities.*;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +22,9 @@ import java.util.Map;
 public class AdServlet extends HttpServlet {
     private final static Logger LOG = Logger.getLogger(AdServlet.class.getName());
     private final Map<String, String> attributes = new HashMap<>();
-    private final Service service = Service.getInstance();
+    private final IModelService modelService = ModelService.getInstance();
+    private final IPersonService personService = PersonService.getInstance();
+    private final IAdvService advService = AdvertService.getInstance();
     public static final String BRAND = "brand";
     public static final String ENGINE = "engine";
     public static final String MODEL = "model";
@@ -82,7 +83,7 @@ public class AdServlet extends HttpServlet {
             Engine engine = new Engine(attributes.get(ENGINE));
             Transmission transmission = new Transmission(attributes.get(TRANSMISSION));
             BodyCar bodyCar = new BodyCar(attributes.get(BODY));
-            model = service.getModelByParam(model, engine, transmission, bodyCar);
+            model = modelService.getModelByParam(model, engine, transmission, bodyCar);
 
             //create fields for Car
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM");
@@ -91,7 +92,7 @@ public class AdServlet extends HttpServlet {
 
             //create advt
             Person person = new Person(req.getSession(false).getAttribute(LOGIN).toString());
-            person = service.getPersonByLogin(person);
+            person = personService.getPersonByLogin(person);
             String desc = String.format("%s %s, %s, %s. %s %s",
                     attributes.get(BRAND),
                     attributes.get(MODEL),
@@ -102,7 +103,7 @@ public class AdServlet extends HttpServlet {
             Advertisement advt = new Advertisement(person, new Timestamp(System.currentTimeMillis()), desc, car, filePath, false);
 
             //add advert to DB
-            service.addEntity(advt);
+            advService.addEntity(advt);
 
             resp.sendRedirect("/index.html");
         } catch (FileUploadException e) {

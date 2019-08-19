@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class SessionEnd extends HttpServlet {
-    public final static Logger LOG = Logger.getLogger(SessionEnd.class.getName());
+    public static final Logger LOG = Logger.getLogger(SessionEnd.class.getName());
 
     /**
      * destroy session upon users request

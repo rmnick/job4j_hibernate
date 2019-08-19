@@ -1,7 +1,9 @@
 package ru.job4j.service;
 
-import java.util.List;
 
-public interface IService {
-
+public interface IService<V> {
+    String SUCCESS = "success";
+    V addEntity(V entity);
+    V updateEntity(V entity);
+    V deleteEntity(V entity);
 }

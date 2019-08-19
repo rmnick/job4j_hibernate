@@ -2,6 +2,8 @@ package ru.job4j.controller;
 
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
+import ru.job4j.service.IPersonService;
+import ru.job4j.service.PersonService;
 import ru.job4j.service.Service;
 import ru.job4j.service.entities.Person;
 
@@ -11,8 +13,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class EnterServlet extends HttpServlet {
-    public final static Logger LOG = Logger.getLogger(EnterServlet.class.getName());
-    private final Service service = Service.getInstance();
+    public static final Logger LOG = Logger.getLogger(EnterServlet.class.getName());
+    private final IPersonService personService = PersonService.getInstance();
 
     /**
      * get data from "index"(enter) page, checking person for existence in DB,
@@ -27,7 +29,7 @@ public class EnterServlet extends HttpServlet {
             PrintWriter pw = resp.getWriter();
             ObjectMapper mapper = new ObjectMapper();
             Person person = mapper.readValue(reader.readLine(), Person.class);
-            if (service.validateEnter(person)) {
+            if (personService.validateEnter(person)) {
                 HttpSession session = req.getSession(true);
                 session.setAttribute("login", person.getLogin());
                 Cookie cookieLog = new Cookie("login", person.getLogin());

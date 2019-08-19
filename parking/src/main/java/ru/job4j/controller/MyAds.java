@@ -2,7 +2,7 @@ package ru.job4j.controller;
 
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
-import ru.job4j.service.Service;
+import ru.job4j.service.*;
 import ru.job4j.service.entities.Advertisement;
 import ru.job4j.service.entities.Car;
 
@@ -15,7 +15,9 @@ import java.io.PrintWriter;
 import java.util.List;
 
 public class MyAds extends HttpServlet {
-    private final Service service = Service.getInstance();
+    private final IAdvService advService = AdvertService.getInstance();
+    private final IViewService viewService = ViewService.getInstance();
+    private final ICarService carService = CarService.getInstance();
     public static final Logger LOG = Logger.getLogger(MyAds.class.getName());
     public static final String DELETE = "delete";
     public static final String SELL = "sell";
@@ -33,9 +35,9 @@ public class MyAds extends HttpServlet {
             ObjectMapper mapper = new ObjectMapper();
             List<Advertisement> ads;
             if (session != null && !session.getAttribute("login").equals("")) {
-                ads = service.getAdsByLogin(session.getAttribute("login").toString());
+                ads = advService.getAdsByLogin(session.getAttribute("login").toString());
                 String realPath = getServletContext().getRealPath("/");
-                mapper.writeValue(pw, service.createViews(ads, realPath));
+                mapper.writeValue(pw, viewService.createViews(ads, realPath));
                 pw.flush();
             }
         } catch (IOException e) {
@@ -59,7 +61,7 @@ public class MyAds extends HttpServlet {
                     case DELETE:
                         car = new Car();
                         car.setId(Integer.valueOf(req.getParameter("id")));
-                        service.deleteEntity(car);
+                        carService.deleteEntity(car);
                         /*or you can delete only ad without car
                          ad = new Advertisement();
                          ad.setId(Integer.valueOf(req.getParameter("id")));
@@ -69,7 +71,7 @@ public class MyAds extends HttpServlet {
                     case SELL:
                         ad = new Advertisement();
                         ad.setId(Integer.valueOf(req.getParameter("id")));
-                        service.updateSoldAd(ad);
+                        advService.updateSoldAd(ad);
                         break;
                         default:
                             break;

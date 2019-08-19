@@ -3,7 +3,7 @@ package ru.job4j.controller;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 
-import ru.job4j.service.Service;
+import ru.job4j.service.*;
 import ru.job4j.service.entities.Advertisement;
 
 import javax.servlet.http.HttpServlet;
@@ -13,7 +13,8 @@ import java.io.*;
 import java.util.*;
 
 public class ShowAdvt extends HttpServlet {
-    private final Service service = Service.getInstance();
+    private final IAdvService advService = AdvertService.getInstance();
+    private final IViewService viewService = ViewService.getInstance();
     public static final Logger LOG = Logger.getLogger(ShowAdvt.class.getName());
     public static final String PATH_DEFAULT_IMG = "default";
     public static final String NAME_DEFAULT_IMG = "car.png";
@@ -26,7 +27,7 @@ public class ShowAdvt extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         try {
-            resp.getWriter().print(service.getNumberOfRows());
+            resp.getWriter().print(advService.getNumberOfRows());
         } catch (IOException e) {
             LOG.error(e.getMessage(), e);
         }
@@ -52,9 +53,9 @@ public class ShowAdvt extends HttpServlet {
                 map.put(param, req.getParameter(param));
             }
 
-            ads = service.getAds(map);
+            ads = advService.getAds(map);
             String realPath = getServletContext().getRealPath("/");
-            mapper.writeValue(pw, service.createViews(ads, realPath));
+            mapper.writeValue(pw, viewService.createViews(ads, realPath));
             pw.flush();
             pw.close();
         } catch (Exception e) {
